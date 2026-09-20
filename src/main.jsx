@@ -24,7 +24,8 @@ import {
   Wrench,
   CheckCircle2,
   Cpu,
-  Monitor
+  Monitor,
+  FileText
 } from "lucide-react";
 import "./styles.css";
 
@@ -69,6 +70,7 @@ function Github({ size = 18, ...props }) {
 
 const linkedInUrl = "https://www.linkedin.com/in/smit-pipalava-54b063311";
 const githubUrl = "https://github.com/SPPATEL91";
+const resumeUrl = "/Smit_Pipalava_Resume.pdf";
 const email = "smitpipalva91@gmail.com";
 
 const navItems = [
@@ -93,22 +95,25 @@ const skillsData = [
   { name: "Node.js", category: "Backend", level: "Event-driven Runtime & Microservices", icon: Server },
   { name: "Express.js", category: "Backend", level: "REST APIs, Routing & Middleware Pipelines", icon: Server },
   { name: "NestJS", category: "Backend", level: "Enterprise TypeScript Modular Framework", icon: Server },
-  { name: ".NET / ASP.NET", category: "Backend", level: "Enterprise Web APIs, C# & Dependency Injection", icon: Server },
+  { name: "ASP.NET Core", category: "Backend", level: "Enterprise Web APIs, C# & Dependency Injection", icon: Server },
 
-  // Programming
+  // Databases
+  { name: "MongoDB", category: "Databases", level: "NoSQL Schema Modeling & Aggregation", icon: Database },
+  { name: "Microsoft SQL Server", category: "Databases", level: "Relational Queries, Procedures & Indexing", icon: Database },
+  { name: "MySQL", category: "Databases", level: "Relational Schemas, Constraints & Optimization", icon: Database },
+  { name: "PostgreSQL", category: "Databases", level: "ACID Transactions, Indexing & Data Integrity", icon: Database },
+
+  // Programming Languages
+  { name: "JavaScript (ES6+)", category: "Languages", level: "Async/Await, Closures, DOM & Modern APIs", icon: Code2 },
   { name: "Python", category: "Languages", level: "Data Processing, Scripting & Algorithms", icon: Code2 },
   { name: "Java", category: "Languages", level: "OOP, Concurrency & Enterprise Systems", icon: Code2 },
   { name: "C", category: "Languages", level: "Memory Management & Low-Level Architecture", icon: Code2 },
 
-  // Databases
-  { name: "MongoDB", category: "Databases", level: "NoSQL Schema Modeling & Aggregation", icon: Database },
-  { name: "SQL Server", category: "Databases", level: "Relational Queries, Procedures & Indexing", icon: Database },
-  { name: "MS SQL / DBMS", category: "Databases", level: "ACID Transactions, Normalization & Optimization", icon: Database },
-
   // CS Fundamentals
   { name: "Data Structures", category: "CS Core", level: "Trees, Graphs, Hash Tables & Complexity", icon: Cpu },
   { name: "Algorithms", category: "CS Core", level: "Dynamic Programming, Divide & Conquer", icon: Cpu },
-  { name: "DBMS Engineering", category: "CS Core", level: "Relational Algebra, ER Modeling & Queries", icon: Cpu },
+  { name: "DBMS Engineering", category: "CS Core", level: "Relational Normalization, ER Modeling & SQL", icon: Cpu },
+  { name: "Object-Oriented Programming", category: "CS Core", level: "Polymorphism, Inheritance & Encapsulation", icon: Cpu },
   { name: "Software Engineering", category: "CS Core", level: "SDLC, System Design & Architecture", icon: Cpu },
   { name: "Computer Networks", category: "CS Core", level: "TCP/IP, OSI Stack & Network Protocols", icon: Cpu },
 
@@ -120,32 +125,68 @@ const skillsData = [
 ];
 
 const projectsData = {
+  "request-management": {
+    id: "request-management",
+    title: "Service Request Management System",
+    category: "Full-Stack Enterprise Application",
+    previewClass: "requests",
+    monogram: "RMS",
+    techBadges: ["React", "Node.js", "Express.js", "MongoDB", "REST APIs"],
+    githubUrl: "https://github.com/SPPATEL91",
+    description:
+      "Full-stack service request management platform built with React, Node.js, Express and MongoDB for organizational grievance tracking and workflow resolution.",
+    overview:
+      "Built an end-to-end management pipeline featuring user authentication, request submissions, categorization, real-time status tracking, and an administrative resolution dashboard for assigned department staff.",
+    problem:
+      "Organizations frequently struggle with lost requests, chaotic manual ticketing, and zero accountability when users submit grievances or logistical needs across departments.",
+    solution:
+      "Developed a centralized full-stack system with a flexible MongoDB document schema, clear ticket lifecycles (Submitted → Assigned → Under Review → Resolved), role-based dashboards, and granular staff resolution logs.",
+    features: [
+      "Request management and self-service ticket lodging with category, priority, and file attachments",
+      "Role-based dashboards for users, assigned department staff, and administrators",
+      "RESTful APIs and CRUD operations with input validation and error handling",
+      "Live request status timeline and progress tracking across lifecycle milestones",
+      "MongoDB integration for secure, scalable document storage and audit logging"
+    ],
+    architecture: [
+      "React SPA frontend with structured state management and responsive forms",
+      "Express.js & Node.js backend following RESTful resource design",
+      "MongoDB document database with schemas, validation, and indexed queries",
+      "Modular middleware pipeline for request verification and error handling"
+    ],
+    learnings: [
+      "Designing resilient document schemas for stateful request lifecycles",
+      "Implementing clean error-handling contracts between React client and Express REST API",
+      "Managing realistic user permissions and state synchronization across multiple roles"
+    ]
+  },
   "sp-polymers": {
     id: "sp-polymers",
-    title: "SP Polymers",
-    category: "Industrial & Business Platform",
+    title: "SP Polymers (Khodal Industries)",
+    category: "Industrial Manufacturing Platform",
     previewClass: "polymers",
     monogram: "SP",
-    techBadges: ["React", "Responsive UI", "Production SEO", "Industrial Catalog"],
+    techBadges: ["React", "Next.js", "Node.js", "Responsive UI", "Production SEO"],
     liveUrl: "https://khodal-industries-ma1m-q68gbqe9n-sppatel8.vercel.app/",
+    githubUrl: "https://github.com/SPPATEL91/Khodal-Industries-",
     description:
-      "A modern, high-performance business website designed for SP Polymers, dedicated to presenting plastic raw materials, manufacturing capacity, technical specifications, and corporate credibility.",
+      "A modern commercial web platform developed for plastic raw materials, manufacturing capacity, technical specifications, and corporate credibility.",
     overview:
-      "Created a robust digital presence that translates industrial manufacturing capabilities into an intuitive, elegant web catalog. The platform focuses on fast load speeds, responsive device adaptations, and clear information hierarchy for B2B visitors.",
+      "Created a robust digital presence that translates industrial manufacturing capabilities into an intuitive, elegant web catalog. The platform focuses on fast load speeds, responsive device adaptations, and clear information hierarchy for commercial buyers.",
     problem:
       "Industrial manufacturing companies often suffer from outdated or fragmented web presences that fail to communicate product variety, raw material grades, and production capacity to prospective commercial buyers.",
     solution:
       "Engineered an optimized digital catalog with clean navigational routes, high-contrast typography, fast static delivery, and structured company information that builds immediate buyer trust.",
     features: [
-      "Dynamic catalog presentation for plastic polymer raw materials",
-      "Comprehensive company overview and manufacturing capabilities showcase",
-      "Mobile-first responsive layout optimized for all modern viewports",
-      "Direct inquiry integration for commercial quotes and sample requests",
-      "High performance, fast load times, and structured SEO metadata"
+      "Information platform for plastic raw materials and manufacturing processes",
+      "Dynamic catalog presentation for plastic polymer raw materials and grades",
+      "Fully responsive interface for seamless accessibility across all devices",
+      "Integrated animations and interactive UI to improve commercial engagement",
+      "Direct inquiry integration for commercial quotes and sample requests"
     ],
     architecture: [
-      "Modern component-driven frontend architecture",
-      "Optimized static asset bundling and image compression",
+      "Component-driven frontend architecture with React & Next.js",
+      "Optimized static asset bundling, responsive styling, and fast delivery",
       "Clean CSS layout systems with fluid typographic scales",
       "Production deployment with zero layout shifts (CLS)"
     ],
@@ -155,55 +196,22 @@ const projectsData = {
       "Designing for B2B credibility and clear conversion actions"
     ]
   },
-  "request-management": {
-    id: "request-management",
-    title: "Request Management System",
-    category: "Full-Stack Enterprise Application",
-    previewClass: "requests",
-    monogram: "RMS",
-    techBadges: ["React", "Node.js", "Express.js", "SQL Database", "REST APIs"],
-    description:
-      "A complete full-stack complaint and request management application that enables users to lodge requests, track progress transparently, and empowers staff with resolving workflows.",
-    overview:
-      "Built an end-to-end management pipeline featuring user authentication, request submissions, categorization, real-time status tracking, and an administrative resolution dashboard for assigned department staff.",
-    problem:
-      "Organizations frequently struggle with lost requests, chaotic manual ticketing, and zero accountability when users submit grievances or logistical needs across departments.",
-    solution:
-      "Developed a centralized full-stack system with a normalized SQL relational schema, clear ticket lifecycles (Submitted → Assigned → Under Review → Resolved), and granular staff resolution logs.",
-    features: [
-      "Self-service ticket lodging with category, priority, and file attachment support",
-      "Live request status timeline and progress tracker for users",
-      "Administrative workflow dashboard for assigning staff and setting resolution milestones",
-      "Secure backend REST API with parameterized SQL queries and input validation",
-      "Automated status change audit logging for complete accountability"
-    ],
-    architecture: [
-      "React SPA frontend with structured state management and responsive forms",
-      "Express.js & Node.js backend following RESTful resource design",
-      "Relational SQL database with foreign key constraints, indexes, and transaction safety",
-      "Modular middleware pipeline for request verification and error handling"
-    ],
-    learnings: [
-      "Designing resilient relational schemas for stateful ticket lifecycles",
-      "Implementing clean error-handling contracts between React client and Express API",
-      "Managing realistic user permissions and state synchronization across multiple roles"
-    ]
-  },
   "student-projects": {
     id: "student-projects",
     title: "Student Project Management System (SPMS)",
-    category: "Role-Based Academic Platform",
+    category: "Role-Based Academic Governance Platform",
     previewClass: "academic",
     monogram: "SPMS",
-    techBadges: ["React", ".NET / ASP.NET", "SQL Server", "RBAC Security", "Auth"],
+    techBadges: ["React", "ASP.NET Core", "SQL Server", "RBAC Security", "REST APIs"],
+    githubUrl: "https://github.com/SPPATEL91/STUDENT-PROJECT-MANAGEMENT-SYSTEM",
     description:
-      "An enterprise academic management platform featuring fine-grained Role-Based Access Control (RBAC) across Admin, Faculty, and Student portals to oversee project lifecycles.",
+      "Role-Based Access Control (RBAC) academic governance platform powering Student, Faculty, and Admin portals for university milestone management and grading.",
     overview:
       "Engineered an academic governance system that replaces messy email submissions and manual spreadsheets with structured milestone submissions, faculty reviews, grading rubrics, and admin controls.",
     problem:
       "Universities require strict separation of concerns: students need to form teams and submit project milestones; faculty mentors need to review and score deliverables; administrators need macro oversight of department progress.",
     solution:
-      "Created a robust multi-portal solution powered by ASP.NET backend services, SQL Server relational models, and a responsive React UI, enforced with rigorous Role-Based Access Control.",
+      "Created a robust multi-portal solution powered by ASP.NET Core backend services, SQL Server relational models, and a responsive React UI, enforced with rigorous Role-Based Access Control.",
     features: [
       "Three distinct dedicated portals: Student Workspace, Faculty Evaluation Hub, and Admin Command Center",
       "Role-Based Access Control (RBAC) preventing unauthorized endpoint access",
@@ -213,7 +221,7 @@ const projectsData = {
     ],
     architecture: [
       "React component library tailored with distinct portal dashboards",
-      "ASP.NET / .NET Core Web API with secure controller authorization filters",
+      "ASP.NET Core Web API with secure controller authorization filters",
       "Microsoft SQL Server database with transactional integrity and stored procedures",
       "Token-based authentication and Claims-based Role authorization"
     ],
@@ -509,7 +517,7 @@ function ProjectCard({ project, onOpen }) {
             type="button"
             className="btn-details"
             onClick={() => onOpen(project.id)}
-            aria-label={`View details for ${project.title}`}
+            aria-label={`Inspect architecture and details for ${project.title}`}
           >
             Inspect Architecture <ChevronRight size={15} />
           </button>
@@ -521,9 +529,22 @@ function ProjectCard({ project, onOpen }) {
               target="_blank"
               rel="noopener noreferrer"
               className="btn-live"
-              aria-label={`Launch live demo of ${project.title}`}
+              aria-label={`Launch live production site of ${project.title}`}
             >
               Live Demo <ArrowUpRight size={13} />
+            </Magnetic>
+          )}
+
+          {project.githubUrl && (
+            <Magnetic
+              as="a"
+              href={project.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-live"
+              aria-label={`View source code for ${project.title} on GitHub`}
+            >
+              <Github size={13} /> GitHub
             </Magnetic>
           )}
         </div>
@@ -634,17 +655,32 @@ function ProjectModal({ project, onClose }) {
             </ul>
           </div>
 
-          {project.liveUrl && (
-            <div style={{ marginTop: "1rem" }}>
-              <Magnetic
-                as="a"
-                href={project.liveUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-              >
-                Launch Production Site <ArrowUpRight size={16} />
-              </Magnetic>
+          {(project.liveUrl || project.githubUrl) && (
+            <div style={{ marginTop: "1.25rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
+              {project.liveUrl && (
+                <Magnetic
+                  as="a"
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-primary"
+                  aria-label={`Launch live production site of ${project.title}`}
+                >
+                  Launch Production Site <ArrowUpRight size={16} />
+                </Magnetic>
+              )}
+              {project.githubUrl && (
+                <Magnetic
+                  as="a"
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-secondary"
+                  aria-label={`View source code for ${project.title} on GitHub`}
+                >
+                  <Github size={16} /> Source Code on GitHub <ArrowUpRight size={14} />
+                </Magnetic>
+              )}
             </div>
           )}
         </div>
@@ -695,7 +731,7 @@ function Header() {
               <span className="brand-badge">SP</span>
               <div className="brand-info">
                 <span className="brand-name">SMIT PIPALAVA</span>
-                <span className="brand-title">CS STUDENT &amp; BUILDER</span>
+                <span className="brand-title">CS STUDENT &amp; FULL-STACK DEVELOPER</span>
               </div>
             </Magnetic>
 
@@ -793,7 +829,7 @@ export function App() {
 
   // Filter skills
   const skillCategories = useMemo(
-    () => ["All", "Frontend", "Backend", "Languages", "Databases", "CS Core", "Tools"],
+    () => ["All", "Frontend", "Backend", "Databases", "Languages", "CS Core", "Tools"],
     []
   );
 
@@ -804,6 +840,10 @@ export function App() {
 
   return (
     <>
+      <a href="#main-content" className="skip-link">
+        Skip to main content
+      </a>
+
       <CustomCursor />
 
       {/* Preloader Sequence */}
@@ -812,7 +852,7 @@ export function App() {
           <div className="preloader-badge">
             <span /> SYSTEM INITIALIZING
           </div>
-          <h2 className="preloader-title">SMIT PIPALAVA</h2>
+          <div className="preloader-title">SMIT PIPALAVA</div>
           <div className="preloader-progress-bar">
             <div className="preloader-progress-fill" />
           </div>
@@ -836,7 +876,7 @@ export function App() {
             <Reveal className="hero-content">
               <div className="hero-eyebrow">
                 <Terminal size={14} />
-                <span>B.Tech CSE Student • Darshan University</span>
+                <span>B.Tech Computer Engineering • Darshan University</span>
               </div>
 
               <h1 className="hero-name">
@@ -844,20 +884,37 @@ export function App() {
               </h1>
 
               <p className="hero-role">
-                Aspiring <span className="accent-text">Full-Stack Developer</span> &amp; Systems Builder
+                Computer Science Student &amp; <span className="accent-text">Full-Stack Developer</span>
               </p>
 
               <p className="hero-bio">
-                Building practical web applications, mastering modern full-stack architectures, and bridging
-                clean relational database design with fluid, responsive user experiences.
+                Computer Science student building practical full-stack web applications using React, Node.js, Express, MongoDB and ASP.NET Core.
               </p>
 
               <div className="hero-actions">
-                <Magnetic as="a" href="#projects" className="btn btn-primary">
-                  Explore Projects <ArrowUpRight size={17} />
+                <Magnetic as="a" href="#projects" className="btn btn-primary" aria-label="View featured projects">
+                  View Projects <ArrowUpRight size={17} />
                 </Magnetic>
-                <Magnetic as="a" href="#about" className="btn btn-secondary">
-                  About Me
+                <Magnetic
+                  as="a"
+                  href={resumeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  download="Smit_Pipalava_Resume.pdf"
+                  className="btn btn-resume"
+                  aria-label="Download Smit Pipalava Resume (PDF)"
+                >
+                  <FileText size={17} /> Download Resume
+                </Magnetic>
+                <Magnetic
+                  as="a"
+                  href={githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-ghost"
+                  aria-label="Visit Smit Pipalava GitHub profile"
+                >
+                  <Github size={17} /> GitHub
                 </Magnetic>
                 <Magnetic
                   as="a"
@@ -865,10 +922,11 @@ export function App() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn-ghost"
+                  aria-label="Visit Smit Pipalava LinkedIn profile"
                 >
                   <Linkedin size={17} /> LinkedIn
                 </Magnetic>
-                <Magnetic as="a" href="#contact" className="btn btn-ghost">
+                <Magnetic as="a" href="#contact" className="btn btn-ghost" aria-label="Contact Smit Pipalava">
                   <Mail size={17} /> Contact
                 </Magnetic>
               </div>
@@ -876,7 +934,7 @@ export function App() {
               <div className="hero-stats-row">
                 <div className="stat-item">
                   <span className="stat-num">
-                    8.8<span>/10</span>
+                    8.87<span>/10</span>
                   </span>
                   <span className="stat-label">Academic CGPA</span>
                 </div>
@@ -921,17 +979,17 @@ export function App() {
                 <BookOpen size={14} /> Profile &amp; Background
               </span>
               <h2 id="about-heading" className="section-title">
-                Turning Computer Science Theory into Working Products.
+                About Me
               </h2>
               <p className="section-subtitle">
-                An undergraduate journey driven by curiosity, code craftsmanship, and sharing knowledge through teaching.
+                Turning Computer Science theory into working products, clean architectures, and dependable full-stack applications.
               </p>
             </Reveal>
 
             <div className="about-grid">
               <Reveal className="about-card">
                 <p>
-                  I am a B.Tech Computer Science &amp; Engineering undergraduate at Darshan University, driven by a passion
+                  I am a B.Tech Computer Engineering undergraduate at Darshan University, driven by a passion
                   for full-stack engineering, clean database models, and practical web architectures.
                 </p>
                 <p>
@@ -953,24 +1011,24 @@ export function App() {
                   <GraduationCap size={14} /> Academic Degree
                 </span>
                 <h3>Darshan University</h3>
-                <p className="education-degree">B.Tech in Computer Science &amp; Engineering</p>
+                <p className="education-degree">B.Tech in Computer Engineering</p>
 
                 <dl className="education-meta-list">
                   <div className="meta-row">
-                    <dt>Current Standing</dt>
-                    <dd>3rd Year • 5th Semester</dd>
+                    <dt>Duration</dt>
+                    <dd>2024 &ndash; Present</dd>
                   </div>
                   <div className="meta-row">
                     <dt>Cumulative Grade (CGPA)</dt>
-                    <dd className="highlight-grade">8.8 / 10.0</dd>
+                    <dd className="highlight-grade">8.87 / 10.0</dd>
                   </div>
                   <div className="meta-row">
-                    <dt>Expected Graduation</dt>
-                    <dd>2028</dd>
+                    <dt>Academic Focus</dt>
+                    <dd>Full-Stack &amp; DBMS Engineering</dd>
                   </div>
                   <div className="meta-row">
-                    <dt>Core Specializations</dt>
-                    <dd>Full-Stack &amp; DBMS</dd>
+                    <dt>Location</dt>
+                    <dd>Rajkot, Gujarat</dd>
                   </div>
                 </dl>
               </Reveal>
@@ -986,11 +1044,10 @@ export function App() {
                 <Cpu size={14} /> Engineering Arsenal
               </span>
               <h2 id="skills-heading" className="section-title">
-                Technologies, Frameworks &amp; Core Disciplines.
+                Skills &amp; Technical Stack
               </h2>
               <p className="section-subtitle">
-                No superficial progress bars. Filter by domain to explore the languages, frameworks, and database
-                engines I work with.
+                Languages, frameworks, databases, and core computer science fundamentals organized by technical domain.
               </p>
             </Reveal>
 
@@ -1033,10 +1090,10 @@ export function App() {
                 <Layers size={14} /> Practical Software
               </span>
               <h2 id="projects-heading" className="section-title">
-                Featured Applications &amp; System Builds.
+                Featured Projects
               </h2>
               <p className="section-subtitle">
-                Engineered with modern full-stack architectures, practical relational data models, and interactive user interfaces.
+                Engineered with modern full-stack architectures, practical data models, and accessible user interfaces.
               </p>
             </Reveal>
 
@@ -1056,10 +1113,10 @@ export function App() {
                 <Terminal size={14} /> Leadership &amp; Pedagogy
               </span>
               <h2 id="exp-heading" className="section-title">
-                Teaching Experience &amp; Academic Contributions.
+                Teaching Experience &amp; Leadership
               </h2>
               <p className="section-subtitle">
-                Hands-on classroom leadership that enhanced technical communication and mastery of database systems.
+                Academic mentorship and hands-on lab instruction that reinforced database fundamentals and software communication.
               </p>
             </Reveal>
 
@@ -1105,10 +1162,10 @@ export function App() {
                 <Award size={14} /> Competitive Milestone
               </span>
               <h2 id="achieve-heading" className="section-title">
-                College-Level Hackathon Finalist.
+                Achievements &amp; Hackathons
               </h2>
               <p className="section-subtitle">
-                Competitive engineering under pressure, rapid architecture drafting, and end-to-end prototype delivery.
+                Competitive hackathon finalist journey, rapid prototyping, and end-to-end full-stack prototype delivery.
               </p>
             </Reveal>
 
@@ -1173,11 +1230,10 @@ export function App() {
                     <Mail size={14} /> Get in Touch
                   </span>
                   <h2 id="contact-heading" className="section-title">
-                    Open to Collaboration, Projects &amp; Internships.
+                    Get in Touch
                   </h2>
                   <p className="section-subtitle">
-                    Feel free to reach out for software development discussions, full-stack opportunities, or academic
-                    inquiries.
+                    Open to full-stack engineering opportunities, project collaborations, and software discussions.
                   </p>
                 </div>
 
@@ -1211,10 +1267,31 @@ export function App() {
                   </div>
 
                   <a
+                    href={resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    download="Smit_Pipalava_Resume.pdf"
+                    className="contact-channel-item"
+                    aria-label="Download Smit Pipalava Resume (PDF)"
+                  >
+                    <div className="channel-meta">
+                      <div className="channel-icon">
+                        <FileText size={18} />
+                      </div>
+                      <div className="channel-labels">
+                        <span className="channel-label">Curriculum Vitae</span>
+                        <span className="channel-val">Download Resume (PDF)</span>
+                      </div>
+                    </div>
+                    <ArrowUpRight size={18} color="var(--accent-cyan)" />
+                  </a>
+
+                  <a
                     href={linkedInUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="contact-channel-item"
+                    aria-label="Visit Smit Pipalava LinkedIn profile"
                   >
                     <div className="channel-meta">
                       <div className="channel-icon">
@@ -1233,6 +1310,7 @@ export function App() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="contact-channel-item"
+                    aria-label="Visit Smit Pipalava GitHub profile"
                   >
                     <div className="channel-meta">
                       <div className="channel-icon">
@@ -1270,7 +1348,7 @@ export function App() {
           <p className="footer-author">
             &copy; {new Date().getFullYear()} Smit Pipalava. Crafted with precision &amp; modern web craft.
           </p>
-          <Magnetic as="a" href="#home" className="btn-details">
+          <Magnetic as="a" href="#home" className="btn-details" aria-label="Back to top of page">
             Back to top &uarr;
           </Magnetic>
         </div>
