@@ -68,7 +68,7 @@ function Github({ size = 18, ...props }) {
 }
 
 const linkedInUrl = "https://www.linkedin.com/in/smit-pipalava-54b063311";
-const githubUrl = "https://github.com";
+const githubUrl = "https://github.com/SPPATEL91";
 const email = "smitpipalva91@gmail.com";
 
 const navItems = [
@@ -1223,6 +1223,24 @@ export function App() {
                       <div className="channel-labels">
                         <span className="channel-label">Professional Profile</span>
                         <span className="channel-val">linkedin.com/in/smit-pipalava</span>
+                      </div>
+                    </div>
+                    <ArrowUpRight size={18} color="var(--accent-cyan)" />
+                  </a>
+
+                  <a
+                    href={githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="contact-channel-item"
+                  >
+                    <div className="channel-meta">
+                      <div className="channel-icon">
+                        <Github size={18} />
+                      </div>
+                      <div className="channel-labels">
+                        <span className="channel-label">GitHub Profile</span>
+                        <span className="channel-val">github.com/SPPATEL91</span>
                       </div>
                     </div>
                     <ArrowUpRight size={18} color="var(--accent-cyan)" />
