@@ -1,67 +1,26 @@
-import React, { useEffect, useMemo, useRef, useState, useCallback, Suspense, lazy } from "react";
+﻿import React, { useEffect, useRef, useState, useCallback, Suspense, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import Lenis from "lenis";
-
-const HeroCanvas3D = lazy(() => import("./HeroCanvas3D.jsx"));
 import {
-  ArrowUpRight,
-  ChevronRight,
-  Code2,
-  ExternalLink,
-  Mail,
-  MapPin,
-  Sparkles,
-  Terminal,
-  Check,
-  Copy,
-  X,
-  GraduationCap,
-  Award,
-  BookOpen,
-  Layers,
-  Server,
-  Database,
-  Wrench,
-  CheckCircle2,
-  Cpu,
-  Monitor,
-  FileText
+  ArrowUpRight, ChevronRight, Code2, ExternalLink, Mail, MapPin,
+  Sparkles, Terminal, Check, Copy, X, GraduationCap, Award, BookOpen,
+  Layers, Server, Database, Wrench, CheckCircle2, Cpu, Monitor, FileText,
+  Zap, Globe, Shield, BarChart2
 } from "lucide-react";
 import "./styles.css";
 
-function Linkedin({ size = 18, ...props }) {
+function Linkedin({ size = 18, ...p }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
       <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect x="2" y="9" width="4" height="12" />
-      <circle cx="4" cy="4" r="2" />
+      <rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" />
     </svg>
   );
 }
 
-function Github({ size = 18, ...props }) {
+function Github({ size = 18, ...p }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
       <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
       <path d="M9 18c-4.51 2-5-2-7-2" />
     </svg>
@@ -74,54 +33,11 @@ const resumeUrl = "/Smit_Pipalava_Resume.pdf";
 const email = "smitpipalva91@gmail.com";
 
 const navItems = [
-  { label: "Home", id: "home" },
-  { label: "About", id: "about" },
-  { label: "Skills", id: "skills" },
-  { label: "Projects", id: "projects" },
-  { label: "Experience", id: "experience" },
-  { label: "Achievements", id: "achievements" },
-  { label: "Contact", id: "contact" }
-];
-
-const skillsData = [
-  // Frontend
-  { name: "React", category: "Frontend", level: "Advanced Component Architecture & State", icon: Monitor },
-  { name: "Next.js", category: "Frontend", level: "SSR, App Router & Static Generation", icon: Monitor },
-  { name: "JavaScript (ES6+)", category: "Frontend", level: "Async, Closures & Modern Web APIs", icon: Code2 },
-  { name: "HTML5 & Semantic Web", category: "Frontend", level: "Accessible & Responsive Standards", icon: Monitor },
-  { name: "CSS3 & Modern Layouts", category: "Frontend", level: "Flexbox, Grid & High-End Animations", icon: Monitor },
-
-  // Backend
-  { name: "Node.js", category: "Backend", level: "Event-driven Runtime & Microservices", icon: Server },
-  { name: "Express.js", category: "Backend", level: "REST APIs, Routing & Middleware Pipelines", icon: Server },
-  { name: "NestJS", category: "Backend", level: "Enterprise TypeScript Modular Framework", icon: Server },
-  { name: "ASP.NET Core", category: "Backend", level: "Enterprise Web APIs, C# & Dependency Injection", icon: Server },
-
-  // Databases
-  { name: "MongoDB", category: "Databases", level: "NoSQL Schema Modeling & Aggregation", icon: Database },
-  { name: "Microsoft SQL Server", category: "Databases", level: "Relational Queries, Procedures & Indexing", icon: Database },
-  { name: "MySQL", category: "Databases", level: "Relational Schemas, Constraints & Optimization", icon: Database },
-  { name: "PostgreSQL", category: "Databases", level: "ACID Transactions, Indexing & Data Integrity", icon: Database },
-
-  // Programming Languages
-  { name: "JavaScript (ES6+)", category: "Languages", level: "Async/Await, Closures, DOM & Modern APIs", icon: Code2 },
-  { name: "Python", category: "Languages", level: "Data Processing, Scripting & Algorithms", icon: Code2 },
-  { name: "Java", category: "Languages", level: "OOP, Concurrency & Enterprise Systems", icon: Code2 },
-  { name: "C", category: "Languages", level: "Memory Management & Low-Level Architecture", icon: Code2 },
-
-  // CS Fundamentals
-  { name: "Data Structures", category: "CS Core", level: "Trees, Graphs, Hash Tables & Complexity", icon: Cpu },
-  { name: "Algorithms", category: "CS Core", level: "Dynamic Programming, Divide & Conquer", icon: Cpu },
-  { name: "DBMS Engineering", category: "CS Core", level: "Relational Normalization, ER Modeling & SQL", icon: Cpu },
-  { name: "Object-Oriented Programming", category: "CS Core", level: "Polymorphism, Inheritance & Encapsulation", icon: Cpu },
-  { name: "Software Engineering", category: "CS Core", level: "SDLC, System Design & Architecture", icon: Cpu },
-  { name: "Computer Networks", category: "CS Core", level: "TCP/IP, OSI Stack & Network Protocols", icon: Cpu },
-
-  // Tools
-  { name: "Git & GitHub", category: "Tools", level: "Version Control, CI/CD & Collaboration", icon: Wrench },
-  { name: "Postman", category: "Tools", level: "API Testing, Mocking & Documentation", icon: Wrench },
-  { name: "Office Automation Tools", category: "Tools", level: "Workflow Productivity & Automation", icon: Wrench },
-  { name: "VS Code & Modern IDEs", category: "Tools", level: "Dev Tooling, Debugging & Extensions", icon: Wrench }
+  { label: "Work",       id: "projects"     },
+  { label: "About",      id: "about"        },
+  { label: "Experience", id: "experience"   },
+  { label: "Skills",     id: "skills"       },
+  { label: "Contact",    id: "contact"      },
 ];
 
 const projectsData = {
@@ -133,32 +49,33 @@ const projectsData = {
     monogram: "RMS",
     techBadges: ["React", "Node.js", "Express.js", "MongoDB", "REST APIs"],
     githubUrl: "https://github.com/SPPATEL91",
-    description:
-      "Full-stack service request management platform built with React, Node.js, Express and MongoDB for organizational grievance tracking and workflow resolution.",
-    overview:
-      "Built an end-to-end management pipeline featuring user authentication, request submissions, categorization, real-time status tracking, and an administrative resolution dashboard for assigned department staff.",
-    problem:
-      "Organizations frequently struggle with lost requests, chaotic manual ticketing, and zero accountability when users submit grievances or logistical needs across departments.",
-    solution:
-      "Developed a centralized full-stack system with a flexible MongoDB document schema, clear ticket lifecycles (Submitted → Assigned → Under Review → Resolved), role-based dashboards, and granular staff resolution logs.",
+    description: "Full-stack service request management platform built with React, Node.js, Express and MongoDB for organizational grievance tracking and workflow resolution.",
+    overview: "Built an end-to-end management pipeline featuring user authentication, request submissions, categorization, real-time status tracking, and an administrative resolution dashboard.",
+    problem: "Organizations frequently struggle with lost requests, chaotic manual ticketing, and zero accountability when users submit grievances or logistical needs across departments.",
+    solution: "Developed a centralized full-stack system with a flexible MongoDB document schema, clear ticket lifecycles (Submitted → Assigned → Under Review → Resolved), role-based dashboards, and granular staff resolution logs.",
     features: [
       "Request management and self-service ticket lodging with category, priority, and file attachments",
       "Role-based dashboards for users, assigned department staff, and administrators",
       "RESTful APIs and CRUD operations with input validation and error handling",
       "Live request status timeline and progress tracking across lifecycle milestones",
-      "MongoDB integration for secure, scalable document storage and audit logging"
+      "MongoDB integration for secure, scalable document storage and audit logging",
     ],
     architecture: [
       "React SPA frontend with structured state management and responsive forms",
       "Express.js & Node.js backend following RESTful resource design",
       "MongoDB document database with schemas, validation, and indexed queries",
-      "Modular middleware pipeline for request verification and error handling"
+      "Modular middleware pipeline for request verification and error handling",
     ],
     learnings: [
       "Designing resilient document schemas for stateful request lifecycles",
       "Implementing clean error-handling contracts between React client and Express REST API",
-      "Managing realistic user permissions and state synchronization across multiple roles"
-    ]
+      "Managing realistic user permissions and state synchronization across multiple roles",
+    ],
+    highlights: [
+      "Role-based dashboards for 3 user types",
+      "Full ticket lifecycle: Submitted → Assigned → Resolved",
+      "RESTful API with complete CRUD operations",
+    ],
   },
   "sp-polymers": {
     id: "sp-polymers",
@@ -169,68 +86,70 @@ const projectsData = {
     techBadges: ["React", "Next.js", "Node.js", "Responsive UI", "Production SEO"],
     liveUrl: "https://khodal-industries-ma1m-q68gbqe9n-sppatel8.vercel.app/",
     githubUrl: "https://github.com/SPPATEL91/Khodal-Industries-",
-    description:
-      "A modern commercial web platform developed for plastic raw materials, manufacturing capacity, technical specifications, and corporate credibility.",
-    overview:
-      "Created a robust digital presence that translates industrial manufacturing capabilities into an intuitive, elegant web catalog. The platform focuses on fast load speeds, responsive device adaptations, and clear information hierarchy for commercial buyers.",
-    problem:
-      "Industrial manufacturing companies often suffer from outdated or fragmented web presences that fail to communicate product variety, raw material grades, and production capacity to prospective commercial buyers.",
-    solution:
-      "Engineered an optimized digital catalog with clean navigational routes, high-contrast typography, fast static delivery, and structured company information that builds immediate buyer trust.",
+    description: "A modern commercial web platform developed for a real plastic raw materials manufacturer — live in production for Khodal Industries.",
+    overview: "Created a robust digital presence that translates industrial manufacturing capabilities into an intuitive, elegant web catalog. Focuses on fast load speeds, responsive device adaptations, and clear information hierarchy for commercial buyers.",
+    problem: "Industrial manufacturing companies often suffer from outdated or fragmented web presences that fail to communicate product variety, raw material grades, and production capacity to prospective buyers.",
+    solution: "Engineered an optimized digital catalog with clean navigational routes, high-contrast typography, fast static delivery, and structured company information that builds immediate buyer trust.",
     features: [
       "Information platform for plastic raw materials and manufacturing processes",
       "Dynamic catalog presentation for plastic polymer raw materials and grades",
       "Fully responsive interface for seamless accessibility across all devices",
       "Integrated animations and interactive UI to improve commercial engagement",
-      "Direct inquiry integration for commercial quotes and sample requests"
+      "Direct inquiry integration for commercial quotes and sample requests",
     ],
     architecture: [
       "Component-driven frontend architecture with React & Next.js",
       "Optimized static asset bundling, responsive styling, and fast delivery",
       "Clean CSS layout systems with fluid typographic scales",
-      "Production deployment with zero layout shifts (CLS)"
+      "Production deployment with zero layout shifts (CLS)",
     ],
     learnings: [
       "Structuring complex industrial product data into intuitive navigation patterns",
       "Balancing high visual polish with lightning-fast initial load times",
-      "Designing for B2B credibility and clear conversion actions"
-    ]
+      "Designing for B2B credibility and clear conversion actions",
+    ],
+    highlights: [
+      "Live in production for a real business (Khodal Industries)",
+      "Full SEO optimization and fast static delivery via Next.js",
+      "Responsive across all device sizes",
+    ],
   },
   "student-projects": {
     id: "student-projects",
-    title: "Student Project Management System (SPMS)",
+    title: "Student Project Management System",
     category: "Role-Based Academic Governance Platform",
     previewClass: "academic",
     monogram: "SPMS",
-    techBadges: ["React", "ASP.NET Core", "SQL Server", "RBAC Security", "REST APIs"],
+    techBadges: ["React", "ASP.NET Core", "SQL Server", "RBAC", "REST APIs"],
     githubUrl: "https://github.com/SPPATEL91/STUDENT-PROJECT-MANAGEMENT-SYSTEM",
-    description:
-      "Role-Based Access Control (RBAC) academic governance platform powering Student, Faculty, and Admin portals for university milestone management and grading.",
-    overview:
-      "Engineered an academic governance system that replaces messy email submissions and manual spreadsheets with structured milestone submissions, faculty reviews, grading rubrics, and admin controls.",
-    problem:
-      "Universities require strict separation of concerns: students need to form teams and submit project milestones; faculty mentors need to review and score deliverables; administrators need macro oversight of department progress.",
-    solution:
-      "Created a robust multi-portal solution powered by ASP.NET Core backend services, SQL Server relational models, and a responsive React UI, enforced with rigorous Role-Based Access Control.",
+    description: "Role-Based Access Control (RBAC) academic governance platform powering Student, Faculty, and Admin portals for university milestone management and grading.",
+    overview: "Engineered an academic governance system that replaces messy email submissions and manual spreadsheets with structured milestone submissions, faculty reviews, grading rubrics, and admin controls.",
+    problem: "Universities require strict separation of concerns: students need to form teams and submit project milestones; faculty mentors need to review and score deliverables; administrators need macro oversight.",
+    solution: "Created a robust multi-portal solution powered by ASP.NET Core backend services, SQL Server relational models, and a responsive React UI, enforced with rigorous Role-Based Access Control.",
     features: [
       "Three distinct dedicated portals: Student Workspace, Faculty Evaluation Hub, and Admin Command Center",
       "Role-Based Access Control (RBAC) preventing unauthorized endpoint access",
       "Milestone tracking: Proposal approval, mid-term progress, code review, and final presentation",
       "Faculty grading interface with remarks, revision requests, and timestamped reviews",
-      "SQL Server database backing with relational integrity, normalized entities, and audit history"
+      "SQL Server database backing with relational integrity, normalized entities, and audit history",
     ],
     architecture: [
       "React component library tailored with distinct portal dashboards",
       "ASP.NET Core Web API with secure controller authorization filters",
       "Microsoft SQL Server database with transactional integrity and stored procedures",
-      "Token-based authentication and Claims-based Role authorization"
+      "Token-based authentication and Claims-based Role authorization",
     ],
     learnings: [
       "Mastering Role-Based Access Control (RBAC) architecture across backend and frontend",
       "Developing typed enterprise APIs using ASP.NET Core conventions",
-      "Managing complex multi-table relationships and academic lifecycle constraints in SQL Server"
-    ]
-  }
+      "Managing complex multi-table relationships and academic lifecycle constraints in SQL Server",
+    ],
+    highlights: [
+      "3-portal RBAC system: Student, Faculty, Admin",
+      "ASP.NET Core Web API + SQL Server relational backend",
+      "Structured milestone evaluation workflow",
+    ],
+  },
 };
 
 const timelineData = [
@@ -239,131 +158,108 @@ const timelineData = [
     target: "Diploma Semester 2 Students",
     institution: "Darshan University",
     duration: "Full Semester Engagement",
-    description:
-      "Conducted practical laboratory sessions, guided students through relational database concepts, ER diagrams, schema normalization, and practical SQL queries on real database instances.",
+    description: "Conducted practical laboratory sessions, guided students through relational database concepts, ER diagrams, schema normalization, and practical SQL queries on real database instances.",
     takeaways: [
       "Led regular weekly lab sessions for foundational computer science students",
       "Explained complex relational concepts: Primary/Foreign keys, Joins, Aggregations, and Constraints",
-      "Developed high confidence in public speaking and articulating technical debugging steps"
-    ]
+      "Developed high confidence in public speaking and articulating technical debugging steps",
+    ],
   },
   {
     role: "Office Automation Tools Teaching Assistant",
     target: "B.Tech Semester 4 Students",
     institution: "Darshan University",
     duration: "Full Semester Engagement",
-    description:
-      "Delivered hands-on practical demonstrations of office automation systems, productivity suites, and software workflows, helping engineering peers master practical software applications.",
+    description: "Delivered hands-on practical demonstrations of office automation systems, productivity suites, and software workflows, helping engineering peers master practical software applications.",
     takeaways: [
-      "Conducted software demonstrations and practical workflows",
+      "Conducted software demonstrations and practical workflows for undergraduate engineers",
       "Assisted students with hands-on exercises, assignments, and problem-solving",
-      "Strengthened pedagogical clarity: learning to break complex workflows into digestible steps"
-    ]
-  }
+      "Strengthened pedagogical clarity: learning to break complex workflows into digestible steps",
+    ],
+  },
 ];
 
+const coreSkills = [
+  { name: "React", desc: "Component architecture, hooks, state management & SPA development", icon: Monitor },
+  { name: "Node.js + Express", desc: "Event-driven runtime, RESTful APIs, middleware & backend services", icon: Server },
+  { name: "MongoDB", desc: "NoSQL document modeling, aggregation pipelines & scalable schemas", icon: Database },
+  { name: "ASP.NET Core", desc: "Enterprise Web APIs, C# dependency injection & authorization", icon: Server },
+  { name: "SQL Server / MySQL", desc: "Relational schemas, normalization, joins & stored procedures", icon: Database },
+  { name: "JavaScript (ES6+)", desc: "Async/await, closures, DOM manipulation & modern web APIs", icon: Code2 },
+];
+
+const familiarSkills = [
+  "Next.js", "NestJS", "Python", "Java", "C", "PostgreSQL", "HTML5", "CSS3",
+  "Git & GitHub", "Postman", "REST APIs", "DSA", "DBMS", "OOP", "VS Code",
+];
+
+/* ── HOOKS ── */
 function useReducedMotion() {
-  const [reducedMotion, setReducedMotion] = useState(false);
-
+  const [rm, setRm] = useState(false);
   useEffect(() => {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(query.matches);
-    const update = () => setReducedMotion(query.matches);
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
+    const q = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setRm(q.matches);
+    const u = () => setRm(q.matches);
+    q.addEventListener("change", u);
+    return () => q.removeEventListener("change", u);
   }, []);
-
-  return reducedMotion;
+  return rm;
 }
 
 function useFinePointer() {
-  const [isFinePointer, setIsFinePointer] = useState(false);
-
+  const [fp, setFp] = useState(false);
   useEffect(() => {
-    const query = window.matchMedia("(pointer: fine) and (hover: hover)");
-    setIsFinePointer(query.matches);
-    const update = () => setIsFinePointer(query.matches);
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
+    const q = window.matchMedia("(pointer: fine) and (hover: hover)");
+    setFp(q.matches);
+    const u = () => setFp(q.matches);
+    q.addEventListener("change", u);
+    return () => q.removeEventListener("change", u);
   }, []);
-
-  return isFinePointer;
+  return fp;
 }
 
-// Custom Cursor with Physics & Hover Expansion
+/* ── CUSTOM CURSOR ── */
 function CustomCursor() {
   const dotRef = useRef(null);
   const ringRef = useRef(null);
-  const isFinePointer = useFinePointer();
-  const reducedMotion = useReducedMotion();
+  const fp = useFinePointer();
+  const rm = useReducedMotion();
 
   useEffect(() => {
-    if (!isFinePointer || reducedMotion) return undefined;
-
-    let cursorX = window.innerWidth / 2;
-    let cursorY = window.innerHeight / 2;
-    let ringX = cursorX;
-    let ringY = cursorY;
-    let targetX = cursorX;
-    let targetY = cursorY;
-    let rafId = null;
-
-    const handlePointerMove = (e) => {
-      targetX = e.clientX;
-      targetY = e.clientY;
-
-      const target = e.target;
-      const isInteractive = target?.closest?.("a, button, .filter-tab, .skill-tech-card, .btn, .modal-close-btn");
-      const isProjectCard = target?.closest?.(".project-card, .project-visual-preview");
-
-      document.body.classList.toggle("cursor-hover", Boolean(isInteractive && !isProjectCard));
-      document.body.classList.toggle("cursor-project", Boolean(isProjectCard));
+    if (!fp || rm) return undefined;
+    let curX = window.innerWidth / 2, curY = window.innerHeight / 2;
+    let ringX = curX, ringY = curY, tX = curX, tY = curY, rafId = null;
+    const move = (e) => {
+      tX = e.clientX; tY = e.clientY;
+      const t = e.target;
+      const isInt = t?.closest?.("a, button, .btn-case-study, .building-chip, .familiar-pill, .stack-pill");
+      const isPrj = t?.closest?.(".project-editorial, .project-visual-zone");
+      document.body.classList.toggle("cursor-hover", Boolean(isInt && !isPrj));
+      document.body.classList.toggle("cursor-project", Boolean(isPrj));
     };
-
-    const handleMouseLeave = () => {
-      if (dotRef.current) dotRef.current.style.opacity = "0";
-      if (ringRef.current) ringRef.current.style.opacity = "0";
-    };
-
-    const handleMouseEnter = () => {
-      if (dotRef.current) dotRef.current.style.opacity = "1";
-      if (ringRef.current) ringRef.current.style.opacity = "1";
-    };
-
+    const leave = () => { if (dotRef.current) dotRef.current.style.opacity = "0"; if (ringRef.current) ringRef.current.style.opacity = "0"; };
+    const enter = () => { if (dotRef.current) dotRef.current.style.opacity = "1"; if (ringRef.current) ringRef.current.style.opacity = "1"; };
     const render = () => {
-      cursorX += (targetX - cursorX) * 0.55;
-      cursorY += (targetY - cursorY) * 0.55;
-      ringX += (targetX - ringX) * 0.18;
-      ringY += (targetY - ringY) * 0.18;
-
-      if (dotRef.current) {
-        dotRef.current.style.setProperty("--cursor-x", `${cursorX}px`);
-        dotRef.current.style.setProperty("--cursor-y", `${cursorY}px`);
-      }
-      if (ringRef.current) {
-        ringRef.current.style.setProperty("--cursor-x", `${ringX}px`);
-        ringRef.current.style.setProperty("--cursor-y", `${ringY}px`);
-      }
-
+      curX += (tX - curX) * 0.55; curY += (tY - curY) * 0.55;
+      ringX += (tX - ringX) * 0.18; ringY += (tY - ringY) * 0.18;
+      if (dotRef.current) { dotRef.current.style.setProperty("--cursor-x", `${curX}px`); dotRef.current.style.setProperty("--cursor-y", `${curY}px`); }
+      if (ringRef.current) { ringRef.current.style.setProperty("--cursor-x", `${ringX}px`); ringRef.current.style.setProperty("--cursor-y", `${ringY}px`); }
       rafId = requestAnimationFrame(render);
     };
-
-    window.addEventListener("pointermove", handlePointerMove, { passive: true });
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseenter", handleMouseEnter);
+    window.addEventListener("pointermove", move, { passive: true });
+    document.addEventListener("mouseleave", leave);
+    document.addEventListener("mouseenter", enter);
     rafId = requestAnimationFrame(render);
-
     return () => {
-      window.removeEventListener("pointermove", handlePointerMove);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      document.removeEventListener("mouseenter", handleMouseEnter);
+      window.removeEventListener("pointermove", move);
+      document.removeEventListener("mouseleave", leave);
+      document.removeEventListener("mouseenter", enter);
       if (rafId) cancelAnimationFrame(rafId);
       document.body.classList.remove("cursor-hover", "cursor-project");
     };
-  }, [isFinePointer, reducedMotion]);
+  }, [fp, rm]);
 
-  if (!isFinePointer || reducedMotion) return null;
-
+  if (!fp || rm) return null;
   return (
     <>
       <div className="custom-cursor-dot" ref={dotRef} aria-hidden="true" />
@@ -374,313 +270,86 @@ function CustomCursor() {
   );
 }
 
-// Magnetic Button with Restrained Spring Attraction
-function Magnetic({ as: Component = "a", className = "", children, strength = 0.22, ...props }) {
+/* ── MAGNETIC ── */
+function Magnetic({ as: C = "a", className = "", children, strength = 0.2, ...props }) {
   const ref = useRef(null);
-  const isFinePointer = useFinePointer();
-  const reducedMotion = useReducedMotion();
-
-  const handleMouseMove = (e) => {
-    if (!isFinePointer || reducedMotion || !ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-    const distanceX = (e.clientX - centerX) * strength;
-    const distanceY = (e.clientY - centerY) * strength;
-
-    ref.current.style.setProperty("--magnet-x", `${distanceX}px`);
-    ref.current.style.setProperty("--magnet-y", `${distanceY}px`);
+  const fp = useFinePointer();
+  const rm = useReducedMotion();
+  const move = (e) => {
+    if (!fp || rm || !ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    const dx = (e.clientX - (r.left + r.width / 2)) * strength;
+    const dy = (e.clientY - (r.top + r.height / 2)) * strength;
+    ref.current.style.setProperty("--magnet-x", `${dx}px`);
+    ref.current.style.setProperty("--magnet-y", `${dy}px`);
   };
-
-  const handleMouseLeave = () => {
-    if (!ref.current) return;
-    ref.current.style.setProperty("--magnet-x", "0px");
-    ref.current.style.setProperty("--magnet-y", "0px");
-  };
-
-  return (
-    <Component
-      ref={ref}
-      className={`magnetic ${className}`.trim()}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      {...props}
-    >
-      {children}
-    </Component>
-  );
+  const leave = () => { if (ref.current) { ref.current.style.setProperty("--magnet-x", "0px"); ref.current.style.setProperty("--magnet-y", "0px"); } };
+  return <C ref={ref} className={`magnetic ${className}`.trim()} onMouseMove={move} onMouseLeave={leave} {...props}>{children}</C>;
 }
 
-// Staggered Scroll Reveal with IntersectionObserver
-const Reveal = React.forwardRef(function Reveal(
-  { as: Component = "div", className = "", children, ...props },
-  forwardedRef
-) {
+/* ── REVEAL ── */
+const Reveal = React.forwardRef(function Reveal({ as: C = "div", className = "", children, ...props }, fRef) {
   const localRef = useRef(null);
-  const reducedMotion = useReducedMotion();
-
+  const rm = useReducedMotion();
   useEffect(() => {
     const el = localRef.current;
     if (!el) return undefined;
-    if (reducedMotion) {
-      el.classList.add("is-visible");
-      return undefined;
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          el.classList.add("is-visible");
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.12 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [reducedMotion]);
-
-  const setRef = (node) => {
-    localRef.current = node;
-    if (typeof forwardedRef === "function") forwardedRef(node);
-    else if (forwardedRef) forwardedRef.current = node;
-  };
-
-  return (
-    <Component ref={setRef} className={`reveal ${className}`.trim()} {...props}>
-      {children}
-    </Component>
-  );
+    if (rm) { el.classList.add("is-visible"); return undefined; }
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { el.classList.add("is-visible"); obs.disconnect(); } }, { threshold: 0.1 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [rm]);
+  const setRef = (n) => { localRef.current = n; if (typeof fRef === "function") fRef(n); else if (fRef) fRef.current = n; };
+  return <C ref={setRef} className={`reveal ${className}`.trim()} {...props}>{children}</C>;
 });
 
-
-// 3D Tilt Project Card with Dynamic Spotlight
-function ProjectCard({ project, onOpen }) {
-  const cardRef = useRef(null);
-  const isFinePointer = useFinePointer();
-  const reducedMotion = useReducedMotion();
-
-  const handlePointerMove = (e) => {
-    if (!isFinePointer || reducedMotion || !cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const rotateX = ((y / rect.height) - 0.5) * -10;
-    const rotateY = ((x / rect.width) - 0.5) * 12;
-
-    cardRef.current.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-    cardRef.current.style.setProperty("--spot-x", `${x}px`);
-    cardRef.current.style.setProperty("--spot-y", `${y}px`);
-  };
-
-  const handlePointerLeave = () => {
-    if (!cardRef.current) return;
-    cardRef.current.style.transform = "perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0)";
-  };
-
-  return (
-    <article
-      ref={cardRef}
-      className="project-card"
-      onMouseMove={handlePointerMove}
-      onMouseLeave={handlePointerLeave}
-    >
-      <div className="project-header-bar">
-        <div className="window-dots" aria-hidden="true">
-          <span className="window-dot red" />
-          <span className="window-dot yellow" />
-          <span className="window-dot green" />
-        </div>
-        <span className="project-category-tag">{project.category}</span>
-      </div>
-
-      <div className={`project-visual-preview ${project.previewClass}`} aria-hidden="true">
-        <span className="project-preview-monogram">{project.monogram}</span>
-      </div>
-
-      <div className="project-card-body">
-        <h3 className="project-title">{project.title}</h3>
-        <p className="project-desc">{project.description}</p>
-
-        <div className="project-tech-badges">
-          {project.techBadges.map((badge) => (
-            <span key={badge} className="tech-badge">
-              {badge}
-            </span>
-          ))}
-        </div>
-
-        <div className="project-card-actions">
-          <button
-            type="button"
-            className="btn-details"
-            onClick={() => onOpen(project.id)}
-            aria-label={`Inspect architecture and details for ${project.title}`}
-          >
-            Inspect Architecture <ChevronRight size={15} />
-          </button>
-
-          {project.liveUrl && (
-            <Magnetic
-              as="a"
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-live"
-              aria-label={`Launch live production site of ${project.title}`}
-            >
-              Live Demo <ArrowUpRight size={13} />
-            </Magnetic>
-          )}
-
-          {project.githubUrl && (
-            <Magnetic
-              as="a"
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-live"
-              aria-label={`View source code for ${project.title} on GitHub`}
-            >
-              <Github size={13} /> GitHub
-            </Magnetic>
-          )}
-        </div>
-      </div>
-    </article>
-  );
-}
-
-// Deep Inspection Project Modal
+/* ── PROJECT MODAL ── */
 function ProjectModal({ project, onClose }) {
-  const modalRef = useRef(null);
-
   useEffect(() => {
     if (!project) return undefined;
-    const origOverflow = document.body.style.overflow;
+    const orig = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = origOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    const kd = (e) => { if (e.key === "Escape") onClose(); };
+    window.addEventListener("keydown", kd);
+    return () => { document.body.style.overflow = orig; window.removeEventListener("keydown", kd); };
   }, [project, onClose]);
-
   if (!project) return null;
-
   return (
-    <div
-      className="modal-overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="modal-proj-title"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div className="modal-container" ref={modalRef}>
+    <div className="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
+      <div className="modal-container">
         <div className="modal-header">
           <div>
-            <span className="preloader-badge">{project.category}</span>
-            <h3 id="modal-proj-title" className="modal-hero-title">
-              {project.title}
-            </h3>
+            <div className="modal-cat-tag">{project.category}</div>
+            <h3 id="modal-title" className="modal-hero-title">{project.title}</h3>
           </div>
-          <button
-            type="button"
-            className="modal-close-btn"
-            onClick={onClose}
-            aria-label="Close project modal"
-          >
-            <X size={18} />
-          </button>
+          <button type="button" className="modal-close-btn" onClick={onClose} aria-label="Close modal"><X size={16} /></button>
         </div>
-
         <div className="modal-scroll-area">
+          <div className="modal-section-block"><h4>01 // System Overview</h4><p>{project.overview}</p></div>
+          <div className="modal-section-block"><h4>02 // The Problem</h4><p>{project.problem}</p></div>
+          <div className="modal-section-block"><h4>03 // Engineering Solution</h4><p>{project.solution}</p></div>
           <div className="modal-section-block">
-            <h4>01 // System Overview</h4>
-            <p>{project.overview}</p>
-          </div>
-
-          <div className="modal-section-block">
-            <h4>02 // The Problem &amp; Challenge</h4>
-            <p>{project.problem}</p>
-          </div>
-
-          <div className="modal-section-block">
-            <h4>03 // Engineering Solution</h4>
-            <p>{project.solution}</p>
-          </div>
-
-          <div className="modal-section-block">
-            <h4>04 // Core Features &amp; Capabilities</h4>
+            <h4>04 // Core Features</h4>
             <ul className="modal-feature-list">
-              {project.features.map((feat) => (
-                <li key={feat} className="modal-feature-item">
-                  <CheckCircle2 size={16} />
-                  <span>{feat}</span>
-                </li>
-              ))}
+              {project.features.map((f) => <li key={f} className="modal-feature-item"><CheckCircle2 size={14} /><span>{f}</span></li>)}
             </ul>
           </div>
-
           <div className="modal-section-block">
-            <h4>05 // Architecture &amp; Tech Stack</h4>
+            <h4>05 // Architecture</h4>
             <ul className="modal-feature-list">
-              {project.architecture.map((arch) => (
-                <li key={arch} className="modal-feature-item">
-                  <Layers size={16} />
-                  <span>{arch}</span>
-                </li>
-              ))}
+              {project.architecture.map((a) => <li key={a} className="modal-feature-item"><Layers size={14} /><span>{a}</span></li>)}
             </ul>
           </div>
-
           <div className="modal-section-block">
             <h4>06 // Engineering Learnings</h4>
             <ul className="modal-feature-list">
-              {project.learnings.map((learn) => (
-                <li key={learn} className="modal-feature-item">
-                  <Sparkles size={16} />
-                  <span>{learn}</span>
-                </li>
-              ))}
+              {project.learnings.map((l) => <li key={l} className="modal-feature-item"><Sparkles size={14} /><span>{l}</span></li>)}
             </ul>
           </div>
-
           {(project.liveUrl || project.githubUrl) && (
-            <div style={{ marginTop: "1.25rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
-              {project.liveUrl && (
-                <Magnetic
-                  as="a"
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-primary"
-                  aria-label={`Launch live production site of ${project.title}`}
-                >
-                  Launch Production Site <ArrowUpRight size={16} />
-                </Magnetic>
-              )}
-              {project.githubUrl && (
-                <Magnetic
-                  as="a"
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-secondary"
-                  aria-label={`View source code for ${project.title} on GitHub`}
-                >
-                  <Github size={16} /> Source Code on GitHub <ArrowUpRight size={14} />
-                </Magnetic>
-              )}
+            <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap", marginTop: "0.5rem" }}>
+              {project.liveUrl && <Magnetic as="a" href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-live-link">Live Site <ArrowUpRight size={14} /></Magnetic>}
+              {project.githubUrl && <Magnetic as="a" href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-github-link"><Github size={14} /> GitHub</Magnetic>}
             </div>
           )}
         </div>
@@ -689,198 +358,130 @@ function ProjectModal({ project, onClose }) {
   );
 }
 
-// Global Site Header
+/* ── HEADER ── */
 function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [active, setActive] = useState("");
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 25);
-    handleScroll();
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
+    const s = () => setScrolled(window.scrollY > 24);
+    s();
+    window.addEventListener("scroll", s, { passive: true });
+    return () => window.removeEventListener("scroll", s);
   }, []);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: "-30% 0px -50% 0px", threshold: 0.05 }
+    const ids = navItems.map((n) => n.id);
+    const obs = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) setActive(e.target.id); }),
+      { rootMargin: "-30% 0px -55% 0px", threshold: 0.05 }
     );
-
-    navItems.forEach(({ id }) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    ids.forEach((id) => { const el = document.getElementById(id); if (el) obs.observe(el); });
+    return () => obs.disconnect();
   }, []);
 
   return (
     <>
-      <header className={`site-header ${scrolled ? "scrolled" : ""}`}>
+      <header className={`site-header${scrolled ? " scrolled" : ""}`}>
         <div className="container">
           <nav className="navbar" aria-label="Main Navigation">
-            <Magnetic as="a" href="#home" className="brand" aria-label="Smit Pipalava Home">
+            <Magnetic as="a" href="#projects" className="brand" aria-label="Smit Pipalava — Home">
               <span className="brand-badge">SP</span>
-              <div className="brand-info">
-                <span className="brand-name">SMIT PIPALAVA</span>
-                <span className="brand-title">CS STUDENT &amp; FULL-STACK DEVELOPER</span>
-              </div>
+              <span className="brand-name">Smit Pipalava</span>
             </Magnetic>
 
             <div className="nav-links-desktop">
               {navItems.map(({ label, id }) => (
-                <a
-                  key={id}
-                  href={`#${id}`}
-                  className={`nav-link ${activeSection === id ? "active" : ""}`}
-                >
-                  {label}
-                </a>
+                <a key={id} href={`#${id}`} className={`nav-link${active === id ? " active" : ""}`}>{label}</a>
               ))}
             </div>
 
-            <div className="nav-status-pill">
-              <span className="status-dot" aria-hidden="true" />
-              <span>Available for Projects &amp; Internships</span>
+            <div className="nav-right">
+              <Magnetic as="a" href={resumeUrl} target="_blank" rel="noopener noreferrer" download="Smit_Pipalava_Resume.pdf" className="btn-nav-resume" aria-label="Download Resume">
+                <FileText size={13} /> Resume
+              </Magnetic>
+              <button type="button" className="menu-toggle" onClick={() => setMobileOpen(!mobileOpen)} aria-label={mobileOpen ? "Close menu" : "Open menu"} aria-expanded={mobileOpen}>
+                {mobileOpen ? <X size={20} /> : <Terminal size={20} />}
+              </button>
             </div>
-
-            <button
-              type="button"
-              className="menu-toggle"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? <X size={22} /> : <Terminal size={22} />}
-            </button>
           </nav>
         </div>
       </header>
 
-      {/* Mobile Drawer */}
-      <div className={`mobile-drawer ${mobileMenuOpen ? "open" : ""}`}>
+      <div className={`mobile-drawer${mobileOpen ? " open" : ""}`} aria-hidden={!mobileOpen}>
         {navItems.map(({ label, id }) => (
-          <a
-            key={id}
-            href={`#${id}`}
-            className={`mobile-nav-link ${activeSection === id ? "active" : ""}`}
-            onClick={() => setMobileMenuOpen(false)}
-          >
-            {label}
-          </a>
+          <a key={id} href={`#${id}`} className={`mobile-nav-link${active === id ? " active" : ""}`} onClick={() => setMobileOpen(false)}>{label}</a>
         ))}
+        <a href={resumeUrl} target="_blank" rel="noopener noreferrer" download="Smit_Pipalava_Resume.pdf" className="mobile-resume-btn">
+          <FileText size={16} /> Download Resume
+        </a>
       </div>
     </>
   );
 }
 
+/* ── APP ── */
 export function App() {
-  const [selectedProjectId, setSelectedProjectId] = useState(null);
-  const [activeSkillCategory, setActiveSkillCategory] = useState("All");
+  const [selectedId, setSelectedId] = useState(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [preloaderDone, setPreloaderDone] = useState(false);
-  const reducedMotion = useReducedMotion();
+  const rm = useReducedMotion();
 
-  const selectedProject = selectedProjectId ? projectsData[selectedProjectId] : null;
+  const selectedProject = selectedId ? projectsData[selectedId] : null;
 
-  // Initialize Lenis Smooth Scrolling
+  /* Lenis smooth scroll */
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.15,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      touchMultiplier: 1.5,
-      infinite: false
-    });
-
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    const lenis = new Lenis({ duration: 1.1, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), touchMultiplier: 1.5 });
+    const raf = (time) => { lenis.raf(time); requestAnimationFrame(raf); };
     const rafId = requestAnimationFrame(raf);
-
-    return () => {
-      cancelAnimationFrame(rafId);
-      lenis.destroy();
-    };
+    return () => { cancelAnimationFrame(rafId); lenis.destroy(); };
   }, []);
 
-  // Quick High-End Preloader
+  /* Preloader */
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setPreloaderDone(true);
-    }, 850);
-    return () => clearTimeout(timer);
+    const t = setTimeout(() => setPreloaderDone(true), 850);
+    return () => clearTimeout(t);
   }, []);
 
-  // Copy email handler
-  const handleCopyEmail = useCallback(() => {
+  /* Copy email */
+  const copyEmail = useCallback(() => {
     navigator.clipboard.writeText(email);
     setCopiedEmail(true);
     setTimeout(() => setCopiedEmail(false), 2500);
   }, []);
 
-  // Filter skills
-  const skillCategories = useMemo(
-    () => ["All", "Frontend", "Backend", "Databases", "Languages", "CS Core", "Tools"],
-    []
-  );
-
-  const filteredSkills = useMemo(() => {
-    if (activeSkillCategory === "All") return skillsData;
-    return skillsData.filter((s) => s.category === activeSkillCategory);
-  }, [activeSkillCategory]);
-
   return (
     <>
-      <a href="#main-content" className="skip-link">
-        Skip to main content
-      </a>
-
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <CustomCursor />
 
-      {/* Preloader Sequence */}
-      <div className={`preloader ${preloaderDone ? "preloader-done" : ""}`} aria-hidden="true">
+      {/* Preloader */}
+      <div className={`preloader${preloaderDone ? " preloader-done" : ""}`} aria-hidden="true">
         <div className="preloader-box">
-          <div className="preloader-badge">
-            <span /> SYSTEM INITIALIZING
-          </div>
-          <div className="preloader-title">SMIT PIPALAVA</div>
-          <div className="preloader-progress-bar">
-            <div className="preloader-progress-fill" />
-          </div>
+          <div className="preloader-badge"><span /> LOADING</div>
+          <div className="preloader-title">Smit Pipalava</div>
+          <div className="preloader-progress-bar"><div className="preloader-progress-fill" /></div>
         </div>
       </div>
-
-      {/* Background Ambience */}
-      <div className="ambient-canvas" aria-hidden="true">
-        <div className="ambient-glow-orb orb-1" />
-        <div className="ambient-glow-orb orb-2" />
-        <div className="ambient-glow-orb orb-3" />
-      </div>
-      <div className="ambient-grid" aria-hidden="true" />
 
       <Header />
 
       <main id="main-content">
-        {/* 1. HERO SECTION */}
-        <section id="home" className="section hero" aria-label="Hero Section">
+
+        {/* ═══════════════════════════════ 1. HERO ═══════════════════════════════ */}
+        <section id="home" className="section hero" aria-label="Hero">
           <div className="container hero-grid">
-            <Reveal className="hero-content">
+            <div className="hero-content">
               <div className="hero-eyebrow">
-                <Terminal size={14} />
-                <span>B.Tech Computer Engineering • Darshan University</span>
+                <Terminal size={12} />
+                B.Tech Computer Engineering · Darshan University
               </div>
 
+              <p className="hero-statement">I build software that solves real problems.</p>
+
               <h1 className="hero-name">
-                Smit <span>Pipalava</span>
+                Smit <span className="gradient-name">Pipalava</span>
               </h1>
 
               <p className="hero-role">
@@ -888,474 +489,502 @@ export function App() {
               </p>
 
               <p className="hero-bio">
-                Computer Science student building practical full-stack web applications using React, Node.js, Express, MongoDB and ASP.NET Core.
+                Computer Science student building practical full-stack web applications across React, Node.js, ASP.NET Core and modern databases.
               </p>
 
               <div className="hero-actions">
-                <Magnetic as="a" href="#projects" className="btn btn-primary" aria-label="View featured projects">
-                  View Projects <ArrowUpRight size={17} />
+                <Magnetic as="a" href="#projects" className="btn btn-primary" aria-label="View my work">
+                  View My Work <ArrowUpRight size={16} />
                 </Magnetic>
-                <Magnetic
-                  as="a"
-                  href={resumeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  download="Smit_Pipalava_Resume.pdf"
-                  className="btn btn-resume"
-                  aria-label="Download Smit Pipalava Resume (PDF)"
-                >
-                  <FileText size={17} /> Download Resume
-                </Magnetic>
-                <Magnetic
-                  as="a"
-                  href={githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost"
-                  aria-label="Visit Smit Pipalava GitHub profile"
-                >
-                  <Github size={17} /> GitHub
-                </Magnetic>
-                <Magnetic
-                  as="a"
-                  href={linkedInUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn btn-ghost"
-                  aria-label="Visit Smit Pipalava LinkedIn profile"
-                >
-                  <Linkedin size={17} /> LinkedIn
-                </Magnetic>
-                <Magnetic as="a" href="#contact" className="btn btn-ghost" aria-label="Contact Smit Pipalava">
-                  <Mail size={17} /> Contact
+                <Magnetic as="a" href={resumeUrl} target="_blank" rel="noopener noreferrer" download="Smit_Pipalava_Resume.pdf" className="btn btn-secondary" aria-label="Download Resume">
+                  <FileText size={16} /> Download Resume
                 </Magnetic>
               </div>
 
-              <div className="hero-stats-row">
-                <div className="stat-item">
-                  <span className="stat-num">
-                    8.87<span>/10</span>
-                  </span>
-                  <span className="stat-label">Academic CGPA</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-num">
-                    3<span>+</span>
-                  </span>
-                  <span className="stat-label">Production Projects</span>
-                </div>
-                <div className="stat-item">
-                  <span className="stat-num">
-                    2<span>×</span>
-                  </span>
-                  <span className="stat-label">TA Appointments</span>
-                </div>
+              <div className="hero-secondary-links">
+                <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="hero-secondary-link" aria-label="GitHub profile">
+                  <Github size={15} /> GitHub <ArrowUpRight size={13} />
+                </a>
+                <span className="hero-divider" aria-hidden="true" />
+                <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" className="hero-secondary-link" aria-label="LinkedIn profile">
+                  <Linkedin size={15} /> LinkedIn <ArrowUpRight size={13} />
+                </a>
+                <span className="hero-divider" aria-hidden="true" />
+                <a href={`mailto:${email}`} className="hero-secondary-link" aria-label="Email Smit Pipalava">
+                  <Mail size={15} /> Email
+                </a>
               </div>
-            </Reveal>
+            </div>
 
-            <Reveal className="hero-visual-area">
-              <Suspense
-                fallback={
-                  <div className="hero-canvas-wrapper" aria-label="Loading 3D Workspace">
-                    <div className="hero-canvas-halo" />
-                    <span className="hero-orbit-tag orbit-tag-1">React / Next.js</span>
-                    <span className="hero-orbit-tag orbit-tag-2">Node / Express</span>
-                    <span className="hero-orbit-tag orbit-tag-3">SQL / DBMS</span>
-                    <span className="hero-orbit-tag orbit-tag-4">.NET / C#</span>
+            {/* Hero Stack Card */}
+            <div className="hero-stack-card" aria-label="Current technology stack">
+              <div className="stack-card-top">
+                <span className="stack-card-label">Current Stack</span>
+                <span className="stack-live-pill">
+                  <span className="stack-live-dot" aria-hidden="true" /> Active
+                </span>
+              </div>
+
+              <div className="stack-layers">
+                <div className="stack-layer-row">
+                  <span className="stack-layer-key">Frontend</span>
+                  <div className="stack-pills">
+                    {["React", "Next.js", "JavaScript", "HTML5", "CSS3"].map((t) => (
+                      <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
+                    ))}
                   </div>
-                }
-              >
-                <HeroCanvas3D reducedMotion={reducedMotion} />
-              </Suspense>
-            </Reveal>
+                </div>
+
+                <div className="stack-sep" />
+
+                <div className="stack-layer-row">
+                  <span className="stack-layer-key">Backend</span>
+                  <div className="stack-pills">
+                    {["Node.js", "Express.js", "ASP.NET Core", "REST APIs"].map((t) => (
+                      <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="stack-sep" />
+
+                <div className="stack-layer-row">
+                  <span className="stack-layer-key">Database</span>
+                  <div className="stack-pills">
+                    {["MongoDB", "SQL Server", "MySQL", "PostgreSQL"].map((t) => (
+                      <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="stack-sep" />
+
+                <div className="stack-layer-row">
+                  <span className="stack-layer-key">Tools</span>
+                  <div className="stack-pills">
+                    {["Git", "GitHub", "Postman", "VS Code"].map((t) => (
+                      <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="stack-card-footer">
+                <span className="stack-footer-key">Focus</span>
+                <span className="stack-footer-val">Full-Stack Engineering</span>
+              </div>
+            </div>
           </div>
         </section>
 
-        {/* 2. ABOUT & EDUCATION */}
-        <section id="about" className="section" aria-labelledby="about-heading">
+        {/* ═══════════════════════════════ 2. CREDIBILITY ═══════════════════════════════ */}
+        <div className="credibility-strip" aria-label="Key metrics">
+          <div className="container">
+            <div className="credibility-grid">
+              <div className="cred-item">
+                <span className="cred-number">8.87</span>
+                <span className="cred-label">CGPA (out of 10)</span>
+              </div>
+              <div className="cred-item">
+                <span className="cred-number">3+</span>
+                <span className="cred-label">Projects Built</span>
+              </div>
+              <div className="cred-item">
+                <span className="cred-number">2</span>
+                <span className="cred-label">Teaching Assistant Roles</span>
+              </div>
+              <div className="cred-item">
+                <span className="cred-number">Top</span>
+                <span className="cred-label">Hackathon Finalist</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ═══════════════════════════════ 3. WHAT I BUILD ═══════════════════════════════ */}
+        <section className="section" aria-labelledby="build-heading">
           <div className="container">
             <Reveal className="section-header">
-              <span className="section-eyebrow">
-                <BookOpen size={14} /> Profile &amp; Background
-              </span>
-              <h2 id="about-heading" className="section-title">
-                About Me
-              </h2>
-              <p className="section-subtitle">
-                Turning Computer Science theory into working products, clean architectures, and dependable full-stack applications.
-              </p>
+              <span className="section-eyebrow"><Zap size={12} /> Capabilities</span>
+              <h2 id="build-heading" className="section-title">What I Build</h2>
+              <p className="section-subtitle">Practical software engineered from frontend to database, built to solve real problems.</p>
+            </Reveal>
+
+            <div className="build-grid">
+              {[
+                { icon: Globe, title: "Full-Stack Applications", desc: "End-to-end web applications connecting responsive React frontends to Node.js/Express backends with real database integration.", tags: ["React", "Node.js", "Express", "MongoDB"] },
+                { icon: Monitor, title: "Business Platforms", desc: "Commercial and industrial web platforms with clear information hierarchy, product catalogs, and conversion-focused UX.", tags: ["Next.js", "SEO", "Responsive UI"] },
+                { icon: Server, title: "Backend Systems", desc: "RESTful API design, authentication flows, CRUD operations, business logic layers and middleware pipelines.", tags: ["REST APIs", "Auth", "ASP.NET Core"] },
+                { icon: Database, title: "Data-Driven Systems", desc: "Role-based data architectures using MongoDB document modeling and SQL Server relational schemas for complex workflows.", tags: ["MongoDB", "SQL Server", "RBAC"] },
+              ].map(({ icon: Icon, title, desc, tags }) => (
+                <Reveal key={title} className="build-card">
+                  <div className="build-icon"><Icon size={20} /></div>
+                  <h3 className="build-title">{title}</h3>
+                  <p className="build-desc">{desc}</p>
+                  <div className="build-tags">{tags.map((t) => <span key={t} className="build-tag">{t}</span>)}</div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════ 4. SELECTED WORK ═══════════════════════════════ */}
+        <section id="projects" className="section section-alt" aria-labelledby="work-heading">
+          <div className="container">
+            <Reveal className="section-header">
+              <span className="section-eyebrow"><Layers size={12} /> Selected Work</span>
+              <h2 id="work-heading" className="section-title">Selected Work</h2>
+              <p className="section-subtitle">Projects where I turned ideas and real requirements into working software.</p>
+            </Reveal>
+
+            <div className="projects-list">
+              {Object.values(projectsData).map((proj, i) => (
+                <Reveal key={proj.id} className={`project-editorial${i % 2 === 1 ? " reverse" : ""}`}>
+                  <div className={`project-visual-zone ${proj.previewClass}`} aria-hidden="true">
+                    <span className="project-visual-monogram">{proj.monogram}</span>
+                  </div>
+                  <div className="project-info">
+                    <span className="project-num">0{i + 1}</span>
+                    <span className="project-cat">{proj.category}</span>
+                    <h3 className="project-title">{proj.title}</h3>
+                    <p className="project-desc">{proj.description}</p>
+                    <div className="project-highlights">
+                      {proj.highlights.map((h) => <p key={h} className="proj-hi">{h}</p>)}
+                    </div>
+                    <div className="project-tech-row">
+                      {proj.techBadges.map((b) => <span key={b} className="tech-badge">{b}</span>)}
+                    </div>
+                    <div className="project-actions">
+                      <button type="button" className="btn-case-study" onClick={() => setSelectedId(proj.id)} aria-label={`View case study for ${proj.title}`}>
+                        Case Study <ChevronRight size={14} />
+                      </button>
+                      {proj.liveUrl && (
+                        <a href={proj.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-live-link" aria-label={`Live site for ${proj.title}`}>
+                          Live Site <ArrowUpRight size={14} />
+                        </a>
+                      )}
+                      {proj.githubUrl && (
+                        <a href={proj.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-github-link" aria-label={`GitHub for ${proj.title}`}>
+                          <Github size={13} /> Code
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════ 5. ENGINEERING HIGHLIGHTS ═══════════════════════════════ */}
+        <section className="section" aria-labelledby="eng-heading">
+          <div className="container">
+            <Reveal className="section-header">
+              <span className="section-eyebrow"><Shield size={12} /> Engineering</span>
+              <h2 id="eng-heading" className="section-title">Engineering Highlights</h2>
+              <p className="section-subtitle">Core engineering patterns applied across all three projects.</p>
+            </Reveal>
+
+            <div className="highlights-grid">
+              {[
+                { icon: Server, title: "API Design", desc: "RESTful APIs following resource-based design: structured endpoints, proper HTTP methods, input validation, and consistent error contracts." },
+                { icon: Database, title: "Database Architecture", desc: "Experience with both MongoDB document modeling for flexible schemas and SQL Server relational design for normalized, integrity-constrained data." },
+                { icon: Shield, title: "Role-Based Systems", desc: "Building multi-portal platforms where different user types (Student, Faculty, Admin — or User, Staff, Admin) access appropriate data and actions." },
+                { icon: Layers, title: "Full-Stack Development", desc: "Working across React frontends, Node.js/ASP.NET Core backends, and database layers — understanding the entire request lifecycle end-to-end." },
+              ].map(({ icon: Icon, title, desc }) => (
+                <Reveal key={title} className="highlight-item">
+                  <div className="highlight-icon"><Icon size={22} /></div>
+                  <h3 className="highlight-title">{title}</h3>
+                  <p className="highlight-desc">{desc}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════ 6. ABOUT & EDUCATION ═══════════════════════════════ */}
+        <section id="about" className="section section-alt" aria-labelledby="about-heading">
+          <div className="container">
+            <Reveal className="section-header">
+              <span className="section-eyebrow"><BookOpen size={12} /> Profile</span>
+              <h2 id="about-heading" className="section-title">About Me</h2>
             </Reveal>
 
             <div className="about-grid">
-              <Reveal className="about-card">
+              <Reveal className="about-text">
                 <p>
-                  I am a B.Tech Computer Engineering undergraduate at Darshan University, driven by a passion
-                  for full-stack engineering, clean database models, and practical web architectures.
+                  I am a B.Tech Computer Engineering undergraduate at Darshan University, driven by a passion for full-stack engineering, clean database models, and practical web architectures that solve actual problems.
                 </p>
                 <p>
-                  I focus on writing dependable code that solves tangible problems—whether that involves industrial product
-                  catalogs, administrative grievance workflows, or multi-tenant role-based academic systems.
+                  I focus on writing dependable code whether that involves industrial product catalogs live for a real business, administrative grievance workflows, or multi-tenant role-based academic governance platforms.
+                </p>
+                <p>
+                  Alongside software development, I served as a Teaching Assistant for both DBMS and Office Automation Tools — teaching relational database concepts and software workflows to diploma and undergraduate engineering students.
                 </p>
                 <div className="about-highlight-box">
-                  <Terminal size={22} />
+                  <Terminal size={18} />
                   <p>
-                    <strong>Teaching Philosophy:</strong> Serving as a Teaching Assistant for both DBMS and Office
-                    Automation reinforced my technical fundamentals. Communicating complex concepts clearly to other students
-                    fundamentally shaped how I architect and document software today.
+                    <strong>Teaching Philosophy:</strong> Explaining complex database and software concepts to other students fundamentally shaped how I architect and document software. Clear communication and clean architecture go together.
                   </p>
                 </div>
               </Reveal>
 
               <Reveal className="education-card">
-                <span className="section-eyebrow">
-                  <GraduationCap size={14} /> Academic Degree
-                </span>
-                <h3>Darshan University</h3>
-                <p className="education-degree">B.Tech in Computer Engineering</p>
-
+                <span className="section-eyebrow"><GraduationCap size={12} /> Education</span>
+                <h3 style={{ marginTop: "0.5rem" }} className="education-degree">Darshan University</h3>
+                <p style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0" }}>B.Tech in Computer Engineering</p>
                 <dl className="education-meta-list">
-                  <div className="meta-row">
-                    <dt>Duration</dt>
-                    <dd>2024 &ndash; Present</dd>
-                  </div>
-                  <div className="meta-row">
-                    <dt>Cumulative Grade (CGPA)</dt>
-                    <dd className="highlight-grade">8.87 / 10.0</dd>
-                  </div>
-                  <div className="meta-row">
-                    <dt>Academic Focus</dt>
-                    <dd>Full-Stack &amp; DBMS Engineering</dd>
-                  </div>
-                  <div className="meta-row">
-                    <dt>Location</dt>
-                    <dd>Rajkot, Gujarat</dd>
-                  </div>
+                  <div className="meta-row"><dt>Duration</dt><dd>2024 – Present</dd></div>
+                  <div className="meta-row"><dt>CGPA</dt><dd className="highlight-grade">8.87 / 10.0</dd></div>
+                  <div className="meta-row"><dt>Focus</dt><dd>Full-Stack &amp; DBMS</dd></div>
+                  <div className="meta-row"><dt>Location</dt><dd>Rajkot, Gujarat</dd></div>
                 </dl>
               </Reveal>
             </div>
           </div>
         </section>
 
-        {/* 3. SKILLS & TECHNOLOGIES */}
+        {/* ═══════════════════════════════ 7. SKILLS ═══════════════════════════════ */}
         <section id="skills" className="section" aria-labelledby="skills-heading">
           <div className="container">
             <Reveal className="section-header">
-              <span className="section-eyebrow">
-                <Cpu size={14} /> Engineering Arsenal
-              </span>
-              <h2 id="skills-heading" className="section-title">
-                Skills &amp; Technical Stack
-              </h2>
-              <p className="section-subtitle">
-                Languages, frameworks, databases, and core computer science fundamentals organized by technical domain.
-              </p>
+              <span className="section-eyebrow"><Cpu size={12} /> Technical Stack</span>
+              <h2 id="skills-heading" className="section-title">Skills</h2>
+              <p className="section-subtitle">Technologies I work with daily, organized by depth of experience.</p>
             </Reveal>
 
-            <div className="skills-filter-nav">
-              {skillCategories.map((cat) => (
-                <button
-                  key={cat}
-                  type="button"
-                  className={`filter-tab ${activeSkillCategory === cat ? "active" : ""}`}
-                  onClick={() => setActiveSkillCategory(cat)}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-
-            <div className="skills-grid">
-              {filteredSkills.map((skill) => {
-                const Icon = skill.icon;
-                return (
-                  <Reveal key={skill.name} className="skill-tech-card">
-                    <div className="skill-tech-top">
-                      <span className="skill-category-badge">{skill.category}</span>
-                      <Icon size={18} color="var(--accent-cyan)" />
-                    </div>
-                    <h3 className="skill-name">{skill.name}</h3>
-                    <p className="skill-desc">{skill.level}</p>
-                  </Reveal>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* 4. FEATURED PROJECTS */}
-        <section id="projects" className="section" aria-labelledby="projects-heading">
-          <div className="container">
-            <Reveal className="section-header">
-              <span className="section-eyebrow">
-                <Layers size={14} /> Practical Software
-              </span>
-              <h2 id="projects-heading" className="section-title">
-                Featured Projects
-              </h2>
-              <p className="section-subtitle">
-                Engineered with modern full-stack architectures, practical data models, and accessible user interfaces.
-              </p>
-            </Reveal>
-
-            <div className="projects-grid">
-              {Object.values(projectsData).map((proj) => (
-                <ProjectCard key={proj.id} project={proj} onOpen={setSelectedProjectId} />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* 5. EXPERIENCE & TEACHING ASSISTANT JOURNEY */}
-        <section id="experience" className="section" aria-labelledby="exp-heading">
-          <div className="container">
-            <Reveal className="section-header">
-              <span className="section-eyebrow">
-                <Terminal size={14} /> Leadership &amp; Pedagogy
-              </span>
-              <h2 id="exp-heading" className="section-title">
-                Teaching Experience &amp; Leadership
-              </h2>
-              <p className="section-subtitle">
-                Academic mentorship and hands-on lab instruction that reinforced database fundamentals and software communication.
-              </p>
-            </Reveal>
-
-            <div className="timeline-track">
-              {timelineData.map((item, idx) => (
-                <div key={item.role} className="timeline-card-wrapper">
-                  <div className="timeline-node-pin" />
-                  <Reveal className="timeline-item-card">
-                    <div className="timeline-item-header">
-                      <h3 className="timeline-role-title">{item.role}</h3>
-                      <span className="timeline-period-badge">{item.duration}</span>
-                    </div>
-                    <p className="timeline-item-desc">{item.description}</p>
-                    <ul className="timeline-takeaways">
-                      {item.takeaways.map((t) => (
-                        <li key={t}>
-                          <ChevronRight size={14} />
-                          <span>{t}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </Reveal>
+            <div className="skills-two-tier">
+              <div>
+                <div className="tier-heading">Core Stack</div>
+                <div className="core-stack-grid">
+                  {coreSkills.map(({ name, desc, icon: Icon }) => (
+                    <Reveal key={name} className="core-skill-card">
+                      <div className="skill-icon-wrap"><Icon size={18} /></div>
+                      <div>
+                        <div className="core-skill-name">{name}</div>
+                        <div className="core-skill-desc">{desc}</div>
+                      </div>
+                    </Reveal>
+                  ))}
                 </div>
+              </div>
+
+              <div>
+                <div className="tier-heading">Also Familiar With</div>
+                <div className="familiar-pills">
+                  {familiarSkills.map((s) => <span key={s} className="familiar-pill">{s}</span>)}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════ 8. EXPERIENCE ═══════════════════════════════ */}
+        <section id="experience" className="section section-alt" aria-labelledby="exp-heading">
+          <div className="container">
+            <Reveal className="section-header">
+              <span className="section-eyebrow"><Terminal size={12} /> Leadership &amp; Pedagogy</span>
+              <h2 id="exp-heading" className="section-title">Experience &amp; Leadership</h2>
+              <p className="section-subtitle">Academic mentorship and practical lab instruction that reinforced database fundamentals and software communication.</p>
+            </Reveal>
+
+            <div className="exp-cards-grid">
+              {timelineData.map((item) => (
+                <Reveal key={item.role} className="exp-card">
+                  <h3 className="exp-role">{item.role}</h3>
+                  <div className="exp-org">{item.institution} · {item.target}</div>
+                  <div className="exp-period">{item.duration}</div>
+                  <p className="exp-desc">{item.description}</p>
+                  <div className="exp-takeaways">
+                    {item.takeaways.map((t) => (
+                      <div key={t} className="exp-takeaway">{t}</div>
+                    ))}
+                  </div>
+                </Reveal>
               ))}
             </div>
 
-            <Reveal className="timeline-quote-box">
-              <Sparkles size={32} />
+            <Reveal className="exp-quote-block">
+              <Sparkles size={24} />
               <blockquote>
-                &ldquo;Teaching relational database management and automation tools to other students taught me that true
-                mastery isn&apos;t just writing code that runs—it is explaining the architecture with such clarity that
-                anyone can understand the system.&rdquo;
+                &ldquo;Teaching relational database management and office automation tools to fellow students taught me that true mastery is being able to explain complex system architecture with complete clarity.&rdquo;
               </blockquote>
             </Reveal>
           </div>
         </section>
 
-        {/* 6. HACKATHONS & ACHIEVEMENTS */}
-        <section id="achievements" className="section" aria-labelledby="achieve-heading">
+        {/* ═══════════════════════════════ 9. ACHIEVEMENTS ═══════════════════════════════ */}
+        <section className="section" aria-labelledby="achieve-heading">
           <div className="container">
             <Reveal className="section-header">
-              <span className="section-eyebrow">
-                <Award size={14} /> Competitive Milestone
-              </span>
-              <h2 id="achieve-heading" className="section-title">
-                Achievements &amp; Hackathons
-              </h2>
-              <p className="section-subtitle">
-                Competitive hackathon finalist journey, rapid prototyping, and end-to-end full-stack prototype delivery.
-              </p>
+              <span className="section-eyebrow"><Award size={12} /> Milestone</span>
+              <h2 id="achieve-heading" className="section-title">Achievements</h2>
+              <p className="section-subtitle">Competitive hackathon finalist journey, rapid prototyping, and end-to-end full-stack defense.</p>
             </Reveal>
 
-            <Reveal className="hackathon-pipeline-card">
-              <div className="hackathon-header-flex">
-                <div>
-                  <span className="preloader-badge">Darshan University Hackathon</span>
-                  <h3 className="timeline-role-title" style={{ marginTop: "0.5rem" }}>
-                    Advanced Through 3 Rigorous Evaluation Stages
-                  </h3>
+            <Reveal className="hackathon-card">
+              <div className="hackathon-header">
+                <span className="hackathon-badge-pill">Darshan University Hackathon</span>
+                <span className="hackathon-participants"><Award size={15} /> ~200–300 Competing Students</span>
+              </div>
+              <h3 className="hackathon-title">Grand Finalist — Advanced Through 3 Evaluation Stages</h3>
+
+              <div className="stages-grid">
+                <div className="stage-box">
+                  <div className="stage-num-label">Stage 01 // Screening</div>
+                  <div className="stage-title">Problem Ideation &amp; Feasibility</div>
+                  <p className="stage-desc">Comprehensive problem definition, architectural planning, and proposal defense against university evaluation criteria.</p>
                 </div>
-                <div className="hackathon-participants-badge">
-                  <Award size={15} /> ~200–300 Competing Students
+
+                <div className="stage-box">
+                  <div className="stage-num-label">Stage 02 // Prototyping</div>
+                  <div className="stage-title">Rapid Sprint &amp; MVP Build</div>
+                  <p className="stage-desc">High-intensity sprint implementing functional REST endpoints, schemas, and responsive user flows within time limits.</p>
+                </div>
+
+                <div className="stage-box stage-final">
+                  <div className="stage-num-label green">Stage 03 // Final Round</div>
+                  <div className="stage-title">Grand Finalist Defense</div>
+                  <p className="stage-desc">Demonstrated working software live before faculty evaluators and judging panel, proving practical utility and robust execution.</p>
                 </div>
               </div>
 
-              <div className="hackathon-stages">
-                <div className="hackathon-stage-box">
-                  <span className="stage-num-badge">STAGE 01 // SCREENING</span>
-                  <h4 className="stage-title">Problem Ideation &amp; Feasibility</h4>
-                  <p className="stage-desc">
-                    Comprehensive problem formulation, architectural planning, and proposal defense against university judging criteria.
-                  </p>
-                </div>
-
-                <div className="hackathon-stage-box">
-                  <span className="stage-num-badge">STAGE 02 // PROTOTYPING</span>
-                  <h4 className="stage-title">Rapid Sprint &amp; MVP Build</h4>
-                  <p className="stage-desc">
-                    High-intensity development sprint, wiring API endpoints, database schemas, and responsive user flows within time limits.
-                  </p>
-                </div>
-
-                <div className="hackathon-stage-box stage-final">
-                  <span className="stage-num-badge" style={{ color: "var(--accent-emerald)" }}>
-                    STAGE 03 // FINAL ROUND
-                  </span>
-                  <h4 className="stage-title">Grand Finalist Defense</h4>
-                  <p className="stage-desc">
-                    Presented working solution live before faculty evaluators and industry panels, demonstrating system value and robustness.
-                  </p>
-                </div>
-              </div>
-
-              <div className="project-tech-badges">
-                <span className="tech-badge">Agile Teamwork</span>
-                <span className="tech-badge">Rapid Prototyping</span>
-                <span className="tech-badge">Live System Defense</span>
-                <span className="tech-badge">Time-Critical Problem Solving</span>
+              <div className="project-tech-row" style={{ marginBottom: 0 }}>
+                {["Agile Sprints", "Rapid Prototyping", "Live System Defense", "Under-Pressure Delivery"].map((t) => (
+                  <span key={t} className="tech-badge">{t}</span>
+                ))}
               </div>
             </Reveal>
           </div>
         </section>
 
-        {/* 7. CONTACT SECTION */}
-        <section id="contact" className="section" aria-labelledby="contact-heading">
+        {/* ═══════════════════════════════ 10. CURRENTLY BUILDING ═══════════════════════════════ */}
+        <section className="section section-alt" aria-labelledby="building-heading">
           <div className="container">
-            <Reveal className="contact-card">
-              <div className="contact-grid">
-                <div>
-                  <span className="section-eyebrow">
-                    <Mail size={14} /> Get in Touch
-                  </span>
-                  <h2 id="contact-heading" className="section-title">
-                    Get in Touch
-                  </h2>
-                  <p className="section-subtitle">
-                    Open to full-stack engineering opportunities, project collaborations, and software discussions.
-                  </p>
+            <Reveal className="section-header">
+              <span className="section-eyebrow"><Zap size={12} /> Current Focus</span>
+              <h2 id="building-heading" className="section-title">Currently Building</h2>
+              <p className="section-subtitle">Areas of deep technical practice I am actively developing every day.</p>
+            </Reveal>
+
+            <Reveal className="building-row">
+              {[
+                "Full-Stack Web Engineering",
+                "Backend Architecture & Microservices",
+                "RESTful API Design & Validation",
+                "Database Modeling (MongoDB & SQL Server)",
+                "Data Structures & Algorithms (DSA)",
+                "Component Systems & Performance"
+              ].map((area) => (
+                <div key={area} className="building-chip">
+                  <span className="building-dot" aria-hidden="true" />
+                  <span>{area}</span>
                 </div>
-
-                <div className="contact-info-list">
-                  <div className="contact-channel-item">
-                    <div className="channel-meta">
-                      <div className="channel-icon">
-                        <Mail size={18} />
-                      </div>
-                      <div className="channel-labels">
-                        <span className="channel-label">Email Address</span>
-                        <span className="channel-val">{email}</span>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      className="copy-btn"
-                      onClick={handleCopyEmail}
-                      aria-label="Copy email address"
-                    >
-                      {copiedEmail ? (
-                        <>
-                          <Check size={14} /> Copied!
-                        </>
-                      ) : (
-                        <>
-                          <Copy size={14} /> Copy
-                        </>
-                      )}
-                    </button>
-                  </div>
-
-                  <a
-                    href={resumeUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    download="Smit_Pipalava_Resume.pdf"
-                    className="contact-channel-item"
-                    aria-label="Download Smit Pipalava Resume (PDF)"
-                  >
-                    <div className="channel-meta">
-                      <div className="channel-icon">
-                        <FileText size={18} />
-                      </div>
-                      <div className="channel-labels">
-                        <span className="channel-label">Curriculum Vitae</span>
-                        <span className="channel-val">Download Resume (PDF)</span>
-                      </div>
-                    </div>
-                    <ArrowUpRight size={18} color="var(--accent-cyan)" />
-                  </a>
-
-                  <a
-                    href={linkedInUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="contact-channel-item"
-                    aria-label="Visit Smit Pipalava LinkedIn profile"
-                  >
-                    <div className="channel-meta">
-                      <div className="channel-icon">
-                        <Linkedin size={18} />
-                      </div>
-                      <div className="channel-labels">
-                        <span className="channel-label">Professional Profile</span>
-                        <span className="channel-val">linkedin.com/in/smit-pipalava</span>
-                      </div>
-                    </div>
-                    <ArrowUpRight size={18} color="var(--accent-cyan)" />
-                  </a>
-
-                  <a
-                    href={githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="contact-channel-item"
-                    aria-label="Visit Smit Pipalava GitHub profile"
-                  >
-                    <div className="channel-meta">
-                      <div className="channel-icon">
-                        <Github size={18} />
-                      </div>
-                      <div className="channel-labels">
-                        <span className="channel-label">GitHub Profile</span>
-                        <span className="channel-val">github.com/SPPATEL91</span>
-                      </div>
-                    </div>
-                    <ArrowUpRight size={18} color="var(--accent-cyan)" />
-                  </a>
-
-                  <div className="contact-channel-item">
-                    <div className="channel-meta">
-                      <div className="channel-icon">
-                        <MapPin size={18} />
-                      </div>
-                      <div className="channel-labels">
-                        <span className="channel-label">Location</span>
-                        <span className="channel-val">Rajkot, Gujarat, India</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              ))}
             </Reveal>
           </div>
         </section>
+
+        {/* ═══════════════════════════════ 11. HOW I BUILD ═══════════════════════════════ */}
+        <section className="section" aria-labelledby="process-heading">
+          <div className="container">
+            <Reveal className="section-header">
+              <span className="section-eyebrow"><Layers size={12} /> Engineering Philosophy</span>
+              <h2 id="process-heading" className="section-title">How I Build</h2>
+              <p className="section-subtitle">I focus on understanding the problem first, designing practical data and API flows, then building maintainable solutions.</p>
+            </Reveal>
+
+            <Reveal className="process-track">
+              {[
+                { step: "01", label: "Understand", sub: "Analyze requirements & user friction" },
+                { step: "02", label: "Design", sub: "Data models, schemas & API contracts" },
+                { step: "03", label: "Build", sub: "Clean frontend & resilient backend code" },
+                { step: "04", label: "Test", sub: "CRUD operations, edge cases & validation" },
+                { step: "05", label: "Ship", sub: "Production deploy, responsive QA & SEO" },
+              ].map(({ step, label, sub }) => (
+                <div key={step} className="process-step">
+                  <div className="process-node">{step}</div>
+                  <div className="process-label">{label}</div>
+                  <div className="process-sub">{sub}</div>
+                </div>
+              ))}
+            </Reveal>
+          </div>
+        </section>
+
+        {/* ═══════════════════════════════ 12. CONTACT ═══════════════════════════════ */}
+        <section id="contact" className="contact-section" aria-labelledby="contact-heading">
+          <div className="contact-grid-bg" aria-hidden="true" />
+          <div className="container">
+            <div className="contact-inner">
+              <div className="contact-eyebrow">
+                <Mail size={12} /> Available for Opportunities
+              </div>
+              <h2 id="contact-heading" className="contact-headline">
+                Have a problem worth building?<br />Let&apos;s build something useful.
+              </h2>
+              <p className="contact-sub">
+                Open to full-stack engineering roles, internships, and technical collaborations.
+              </p>
+
+              <div className="contact-actions">
+                <a href={`mailto:${email}`} className="btn-contact-primary" aria-label="Send email to Smit Pipalava">
+                  <Mail size={16} /> Email Me
+                </a>
+                <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" className="btn-contact-secondary" aria-label="LinkedIn profile">
+                  <Linkedin size={16} /> LinkedIn <ArrowUpRight size={14} />
+                </a>
+                <a href={githubUrl} target="_blank" rel="noopener noreferrer" className="btn-contact-secondary" aria-label="GitHub profile">
+                  <Github size={16} /> GitHub <ArrowUpRight size={14} />
+                </a>
+                <a href={resumeUrl} target="_blank" rel="noopener noreferrer" download="Smit_Pipalava_Resume.pdf" className="btn-contact-secondary" aria-label="Download Resume">
+                  <FileText size={16} /> Resume
+                </a>
+              </div>
+
+              <div className="contact-meta">
+                <span>Rajkot, Gujarat, India</span>
+                <span aria-hidden="true">·</span>
+                <a href={`mailto:${email}`}>{email}</a>
+                <span aria-hidden="true">·</span>
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  style={{ color: "rgba(248,250,252,0.6)", fontSize: "0.8125rem", display: "inline-flex", alignItems: "center", gap: "0.3rem" }}
+                  aria-label="Copy email address"
+                >
+                  {copiedEmail ? <><Check size={12} /> Copied!</> : <><Copy size={12} /> Copy Email</>}
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </main>
 
-      {/* FOOTER */}
+      {/* ═══════════════════════════════ 13. FOOTER ═══════════════════════════════ */}
       <footer className="site-footer">
         <div className="container footer-inner">
-          <p className="footer-author">
-            &copy; {new Date().getFullYear()} Smit Pipalava. Crafted with precision &amp; modern web craft.
-          </p>
-          <Magnetic as="a" href="#home" className="btn-details" aria-label="Back to top of page">
-            Back to top &uarr;
-          </Magnetic>
+          <div>
+            <div className="footer-brand-name">Smit Pipalava</div>
+            <div className="footer-brand-sub">Computer Science Student · Full-Stack Developer</div>
+          </div>
+
+          <div className="footer-links">
+            <a href={githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Github size={14} /> GitHub</a>
+            <a href={linkedInUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Linkedin size={14} /> LinkedIn</a>
+            <a href={`mailto:${email}`} aria-label="Email"><Mail size={14} /> Email</a>
+            <a href={resumeUrl} target="_blank" rel="noopener noreferrer" download="Smit_Pipalava_Resume.pdf" aria-label="Resume"><FileText size={14} /> Resume</a>
+          </div>
+
+          <div className="footer-copy">
+            &copy; 2026 Smit Pipalava
+          </div>
         </div>
       </footer>
 
-      {/* Project Detail Modal */}
-      <ProjectModal project={selectedProject} onClose={() => setSelectedProjectId(null)} />
+      {/* Project Modal */}
+      <ProjectModal project={selectedProject} onClose={() => setSelectedId(null)} />
     </>
   );
 }
@@ -1366,4 +995,3 @@ root.render(
     <App />
   </React.StrictMode>
 );
-
