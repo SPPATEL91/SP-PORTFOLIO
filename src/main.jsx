@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useRef, useState, useCallback, Suspense, lazy } from "react";
+import React, { useEffect, useRef, useState, useCallback, Suspense, lazy } from "react";
 import { createRoot } from "react-dom/client";
 import Lenis from "lenis";
 import {
@@ -23,6 +23,17 @@ function Github({ size = 18, ...p }) {
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
       <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
       <path d="M9 18c-4.51 2-5-2-7-2" />
+    </svg>
+  );
+}
+
+function FlipIcon({ size = 14, ...p }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+      <path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+      <path d="M3 3v5h5" />
+      <path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16" />
+      <path d="M16 16h5v5" />
     </svg>
   );
 }
@@ -426,6 +437,7 @@ export function App() {
   const [selectedId, setSelectedId] = useState(null);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [preloaderDone, setPreloaderDone] = useState(false);
+  const [isHeroFlipped, setIsHeroFlipped] = useState(false);
   const rm = useReducedMotion();
 
   const selectedProject = selectedId ? projectsData[selectedId] : null;
@@ -516,62 +528,127 @@ export function App() {
               </div>
             </div>
 
-            {/* Hero Stack Card */}
-            <div className="hero-stack-card" aria-label="Current technology stack">
-              <div className="stack-card-top">
-                <span className="stack-card-label">Current Stack</span>
-                <span className="stack-live-pill">
-                  <span className="stack-live-dot" aria-hidden="true" /> Active
-                </span>
-              </div>
+            {/* 3D Flip Card: Photo Front + Tech Stack Back */}
+            <div className="hero-flip-wrapper">
+              <div
+                className={`hero-flip-card${isHeroFlipped ? " is-flipped" : ""}`}
+                onClick={() => setIsHeroFlipped(!isHeroFlipped)}
+                onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setIsHeroFlipped(!isHeroFlipped); } }}
+                role="button"
+                tabIndex={0}
+                aria-label={isHeroFlipped ? "Tech stack shown. Click to flip to photo." : "Photo shown. Click to flip to tech stack."}
+              >
+                {/* FRONT FACE: Big Photo */}
+                <div className="flip-face flip-face-front">
+                  <div className="flip-photo-container">
+                    <img
+                      src="/smit-pipalava.png"
+                      alt="Smit Pipalava — Computer Science Student & Full-Stack Developer"
+                      className="flip-photo-img"
+                    />
 
-              <div className="stack-layers">
-                <div className="stack-layer-row">
-                  <span className="stack-layer-key">Frontend</span>
-                  <div className="stack-pills">
-                    {["React", "Next.js", "JavaScript", "HTML5", "CSS3"].map((t) => (
-                      <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
-                    ))}
+                    <div className="flip-photo-top-bar">
+                      <span className="flip-badge-pill">
+                        <span className="flip-badge-dot" aria-hidden="true" /> Active
+                      </span>
+                      <button
+                        type="button"
+                        className="flip-action-pill"
+                        onClick={(e) => { e.stopPropagation(); setIsHeroFlipped(true); }}
+                        aria-label="Flip to see tech stack"
+                      >
+                        <FlipIcon size={12} /> View Stack
+                      </button>
+                    </div>
+
+                    <div className="flip-photo-bottom-card">
+                      <div className="flip-photo-name">Smit Pipalava</div>
+                      <div className="flip-photo-role">Computer Science Student · Full-Stack Developer</div>
+                      <div className="flip-photo-hint">
+                        <FlipIcon size={12} /> Click card to view Current Stack ↺
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div className="stack-sep" />
+                {/* BACK FACE: Current Stack Dashboard */}
+                <div className="flip-face flip-face-back">
+                  <div>
+                    <div className="stack-card-top">
+                      <span className="stack-card-label">Current Stack</span>
+                      <div className="stack-top-right">
+                        <span className="stack-live-pill">
+                          <span className="stack-live-dot" aria-hidden="true" /> Active
+                        </span>
+                        <button
+                          type="button"
+                          className="flip-action-pill"
+                          onClick={(e) => { e.stopPropagation(); setIsHeroFlipped(false); }}
+                          aria-label="Flip to see photo"
+                          style={{ padding: "0.25rem 0.6rem" }}
+                        >
+                          <FlipIcon size={12} /> Photo
+                        </button>
+                      </div>
+                    </div>
 
-                <div className="stack-layer-row">
-                  <span className="stack-layer-key">Backend</span>
-                  <div className="stack-pills">
-                    {["Node.js", "Express.js", "ASP.NET Core", "REST APIs"].map((t) => (
-                      <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
-                    ))}
+                    <div className="stack-layers">
+                      <div className="stack-layer-row">
+                        <span className="stack-layer-key">Frontend</span>
+                        <div className="stack-pills">
+                          {["React", "Next.js", "JavaScript", "HTML5", "CSS3"].map((t) => (
+                            <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="stack-sep" />
+
+                      <div className="stack-layer-row">
+                        <span className="stack-layer-key">Backend</span>
+                        <div className="stack-pills">
+                          {["Node.js", "Express.js", "ASP.NET Core", "REST APIs"].map((t) => (
+                            <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="stack-sep" />
+
+                      <div className="stack-layer-row">
+                        <span className="stack-layer-key">Database</span>
+                        <div className="stack-pills">
+                          {["MongoDB", "SQL Server", "MySQL", "PostgreSQL"].map((t) => (
+                            <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="stack-sep" />
+
+                      <div className="stack-layer-row">
+                        <span className="stack-layer-key">Tools</span>
+                        <div className="stack-pills">
+                          {["Git", "GitHub", "Postman", "VS Code"].map((t) => (
+                            <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="stack-card-footer">
+                      <span className="stack-footer-key">Focus</span>
+                      <span className="stack-footer-val">Full-Stack Engineering</span>
+                    </div>
+                    <div style={{ textAlign: "center", marginTop: "0.6rem" }}>
+                      <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.6875rem", color: "var(--accent)", display: "inline-flex", alignItems: "center", gap: "0.35rem" }}>
+                        <FlipIcon size={12} /> Click card to view Photo ↺
+                      </span>
+                    </div>
                   </div>
                 </div>
-
-                <div className="stack-sep" />
-
-                <div className="stack-layer-row">
-                  <span className="stack-layer-key">Database</span>
-                  <div className="stack-pills">
-                    {["MongoDB", "SQL Server", "MySQL", "PostgreSQL"].map((t) => (
-                      <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="stack-sep" />
-
-                <div className="stack-layer-row">
-                  <span className="stack-layer-key">Tools</span>
-                  <div className="stack-pills">
-                    {["Git", "GitHub", "Postman", "VS Code"].map((t) => (
-                      <span key={t} className="stack-pill"><span className="stack-pill-dot" />{t}</span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="stack-card-footer">
-                <span className="stack-footer-key">Focus</span>
-                <span className="stack-footer-val">Full-Stack Engineering</span>
               </div>
             </div>
           </div>
@@ -711,6 +788,51 @@ export function App() {
             </Reveal>
 
             <div className="about-grid">
+              <Reveal className="about-photo-col">
+                <div className="about-photo-card">
+                  <div className="about-photo-wrap">
+                    <img
+                      src="/smit-pipalava.png"
+                      alt="Smit Pipalava — Computer Science Student & Full-Stack Developer"
+                      className="about-photo-img"
+                      loading="lazy"
+                    />
+                    <div className="about-photo-badge">
+                      <span className="about-photo-badge-name">Smit Pipalava</span>
+                      <span className="about-photo-badge-loc">Rajkot, Gujarat</span>
+                    </div>
+                  </div>
+                  <div className="about-photo-details">
+                    <div className="about-photo-meta-item">
+                      <span className="about-photo-meta-key">University</span>
+                      <span className="about-photo-meta-val">Darshan Univ</span>
+                    </div>
+                    <div className="about-photo-sep" />
+                    <div className="about-photo-meta-item">
+                      <span className="about-photo-meta-key">CGPA</span>
+                      <span className="about-photo-meta-val" style={{ color: "var(--accent)" }}>8.87 / 10</span>
+                    </div>
+                    <div className="about-photo-sep" />
+                    <div className="about-photo-meta-item">
+                      <span className="about-photo-meta-key">Degree</span>
+                      <span className="about-photo-meta-val">B.Tech CE</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="education-card">
+                  <span className="section-eyebrow"><GraduationCap size={12} /> Academic Degree</span>
+                  <h3 style={{ marginTop: "0.5rem" }} className="education-degree">Darshan University</h3>
+                  <p style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0" }}>B.Tech in Computer Engineering</p>
+                  <dl className="education-meta-list">
+                    <div className="meta-row"><dt>Duration</dt><dd>2024 – Present</dd></div>
+                    <div className="meta-row"><dt>CGPA</dt><dd className="highlight-grade">8.87 / 10.0</dd></div>
+                    <div className="meta-row"><dt>Focus</dt><dd>Full-Stack &amp; DBMS</dd></div>
+                    <div className="meta-row"><dt>Location</dt><dd>Rajkot, Gujarat</dd></div>
+                  </dl>
+                </div>
+              </Reveal>
+
               <Reveal className="about-text">
                 <p>
                   I am a B.Tech Computer Engineering undergraduate at Darshan University, driven by a passion for full-stack engineering, clean database models, and practical web architectures that solve actual problems.
@@ -727,18 +849,6 @@ export function App() {
                     <strong>Teaching Philosophy:</strong> Explaining complex database and software concepts to other students fundamentally shaped how I architect and document software. Clear communication and clean architecture go together.
                   </p>
                 </div>
-              </Reveal>
-
-              <Reveal className="education-card">
-                <span className="section-eyebrow"><GraduationCap size={12} /> Education</span>
-                <h3 style={{ marginTop: "0.5rem" }} className="education-degree">Darshan University</h3>
-                <p style={{ fontSize: "0.875rem", color: "var(--text-secondary)", marginBottom: "0" }}>B.Tech in Computer Engineering</p>
-                <dl className="education-meta-list">
-                  <div className="meta-row"><dt>Duration</dt><dd>2024 – Present</dd></div>
-                  <div className="meta-row"><dt>CGPA</dt><dd className="highlight-grade">8.87 / 10.0</dd></div>
-                  <div className="meta-row"><dt>Focus</dt><dd>Full-Stack &amp; DBMS</dd></div>
-                  <div className="meta-row"><dt>Location</dt><dd>Rajkot, Gujarat</dd></div>
-                </dl>
               </Reveal>
             </div>
           </div>
