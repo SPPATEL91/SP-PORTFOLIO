@@ -8,6 +8,7 @@ import {
   Zap, Globe, Shield, BarChart2
 } from "lucide-react";
 import "./styles.css";
+import { PixelGridBackground } from "./PixelGridBackground";
 
 function Linkedin({ size = 18, ...p }) {
   return (
@@ -476,6 +477,9 @@ export function App() {
           <div className="preloader-progress-bar"><div className="preloader-progress-fill" /></div>
         </div>
       </div>
+
+      {/* Interactive Mouse-Reactive Pixel Grid Background */}
+      <PixelGridBackground />
 
       <Header />
 
