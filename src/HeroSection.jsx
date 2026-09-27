@@ -18,9 +18,9 @@ const resumeUrl = "/Smit_Pipalava_Resume.pdf";
 
 const TECH_STACK_HERO = [
   { name: "React", category: "Frontend" },
-  { name: "Next.js", category: "SSR / ISR" },
+  { name: "Next.js", category: "Framework" },
   { name: "Node.js", category: "Runtime" },
-  { name: "Express", category: "REST API" },
+  { name: ".NET", category: "Backend" },
   { name: "MongoDB", category: "NoSQL DB" },
   { name: "SQL Server", category: "Relational DB" },
 ];
@@ -30,7 +30,7 @@ export function HeroSection({ Magnetic }) {
   const profileCardRef = useRef(null);
   const mainContentRef = useRef(null);
 
-  /* Subtle mouse movement for clean desktop feel */
+  /* Subtle mouse movement for desktop depth */
   useEffect(() => {
     const isFinePointer = window.matchMedia("(pointer: fine) and (hover: hover)").matches;
     const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -84,7 +84,7 @@ export function HeroSection({ Magnetic }) {
           <div className="hero-stage-1">
             <div className="hero-status-pill">
               <span className="status-indicator-dot" aria-hidden="true" />
-              <span className="status-indicator-text">FULL-STACK DEVELOPER &amp; CS STUDENT</span>
+              <span className="status-indicator-text">FULL-STACK DEVELOPER &amp; COMPUTER SCIENCE STUDENT</span>
             </div>
             <div className="hero-university-tag">
               <Terminal size={12} />
@@ -94,17 +94,17 @@ export function HeroSection({ Magnetic }) {
 
           {/* Name Headline */}
           <h1 className="hero-display-name hero-stage-2">
-            Smit Pipalava
+            SMIT PIPALAVA
           </h1>
 
           {/* Value Proposition Statement */}
           <p className="hero-display-role hero-stage-3">
-            &ldquo;I build complete web applications — from polished interfaces to APIs, databases, and real-world workflows.&rdquo;
+            &ldquo;I build complete web applications — from polished interfaces to APIs, databases and real-world workflows.&rdquo;
           </p>
 
           {/* Bio Description */}
           <p className="hero-display-bio hero-stage-4">
-            Computer Science &amp; Engineering student focused on building reliable software systems with React, Next.js, Node.js, Express, ASP.NET Core, and MongoDB/SQL Server.
+            B.Tech in Computer Science &amp; Engineering student at Darshan University with an 8.87 CGPA. Experienced in building full-stack applications with React, Next.js, Node.js, ASP.NET Core, and MongoDB/SQL Server.
           </p>
 
           {/* CTA Buttons */}
@@ -125,9 +125,9 @@ export function HeroSection({ Magnetic }) {
             </Magnetic>
           </div>
 
-          {/* Technology Stack Beneath Hero */}
+          {/* Technology Stack Line Beneath Hero */}
           <div className="hero-tech-stack-strip hero-stage-6">
-            <span className="tech-stack-label">CORE STACK:</span>
+            <span className="tech-stack-label">TECH STACK:</span>
             <div className="tech-stack-badges">
               {TECH_STACK_HERO.map(({ name, category }) => (
                 <div key={name} className="hero-tech-badge">
@@ -163,7 +163,7 @@ export function HeroSection({ Magnetic }) {
               />
               <div className="profile-card-overlay-badge">
                 <div className="overlay-badge-name">Smit Pipalava</div>
-                <div className="overlay-badge-role">Full-Stack Engineer &amp; DBMS TA</div>
+                <div className="overlay-badge-role">B.Tech CS Student &amp; Full-Stack Developer</div>
               </div>
             </div>
 
@@ -206,7 +206,7 @@ export function HeroSection({ Magnetic }) {
                 </div>
                 <div className="verified-badge-item">
                   <Sparkles size={13} className="verified-check-icon" />
-                  <span>Hackathon Participant</span>
+                  <span>Hackathon Final Round</span>
                 </div>
               </div>
 

@@ -505,12 +505,12 @@ export function App() {
                 <div className="edu-header-row">
                   <div>
                     <span className="experience-type-tag">PRIMARY EDUCATION</span>
-                    <h3 className="edu-degree-title">B.Tech — Computer Science &amp; Engineering</h3>
+                    <h3 className="edu-degree-title">B.Tech in Computer Science &amp; Engineering</h3>
                     <div className="edu-institution">Darshan University, Rajkot, Gujarat</div>
                   </div>
                   <div className="text-right">
                     <span className="edu-gpa-pill">CGPA: 8.87 / 10</span>
-                    <div className="edu-dates" style={{ marginTop: "0.4rem" }}>2024 – Present</div>
+                    <div className="edu-dates" style={{ marginTop: "0.4rem" }}>Expected 2028</div>
                   </div>
                 </div>
                 <p className="about-body-para" style={{ marginBottom: 0 }}>
@@ -560,11 +560,11 @@ export function App() {
               </div>
 
               <h2 id="contact-heading" className="contact-display-title">
-                LET&apos;S BUILD SOMETHING USEFUL.
+                LET&apos;S BUILD SOMETHING
               </h2>
 
               <p className="contact-sub-paragraph">
-                Have a project, opportunity or interesting problem?
+                Have a project, internship opportunity, or collaboration in mind?
               </p>
 
               <div className="contact-primary-actions">

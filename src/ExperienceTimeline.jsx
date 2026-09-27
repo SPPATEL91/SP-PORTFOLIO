@@ -3,36 +3,36 @@ import { Terminal, CheckCircle2, Calendar, MapPin, Users } from "lucide-react";
 
 const EXPERIENCES = [
   {
-    role: "DBMS Teaching Assistant",
+    role: "DBMS LAB TEACHING ASSISTANT",
     institution: "Darshan University",
     location: "Rajkot, Gujarat",
-    target: "Guided ~60 Students",
+    target: "~60 Students Taught",
     duration: "Academic Semester Appointment",
     description:
-      "Served as Teaching Assistant for Database Management Systems (DBMS) lab sessions, responsible for reinforcing relational database theory and hands-on query authoring.",
+      "Served as Teaching Assistant for Database Management Systems (DBMS) laboratory practicals, responsible for reinforcing relational database theory and query execution.",
     responsibilities: [
-      "Guided approximately 60 students through weekly database management laboratory practicals",
-      "Explained database concepts, ER modeling, primary/foreign keys, and 3NF schema normalization",
-      "Assisted students with SQL query execution, database joins, and troubleshooting learning friction",
+      "Guided approximately 60 students through database concepts and practical laboratory work",
+      "Assisted students with SQL/database-related learning and query authoring (DDL, DML, Joins)",
+      "Explained technical database concepts (ER diagrams, primary/foreign keys, 3NF normalization) in an approachable way",
       "Received positive feedback for clear explanations and supportive practical mentorship",
     ],
     skills: ["DBMS Instruction", "SQL Queries", "Schema Normalization", "Technical Communication"],
   },
   {
-    role: "Office Automation Tools Teaching Assistant",
+    role: "OFFICE AUTOMATION TOOLS TEACHING ASSISTANT",
     institution: "Darshan University",
     location: "Rajkot, Gujarat",
-    target: "Instructed ~100 Students",
+    target: "Practical Demonstrations",
     duration: "Academic Semester Appointment",
     description:
-      "Instructed practical sessions covering desktop productivity suites, structured software workflows, and document processing automation.",
+      "Instructed practical lab sessions covering desktop productivity tools, software workflows, and document processing automation.",
     responsibilities: [
-      "Taught practical Excel, PowerPoint, and Word functionality in weekly lab demonstrations",
-      "Helped students understand real-world productivity workflows, data formatting, and presentation structure",
-      "Improved technical communication, presentation clarity, and 1-on-1 student problem resolution",
-      "Mentored engineering peers through practical evaluations and workflow exercises",
+      "Delivered practical demonstrations covering Excel, PowerPoint, and Word functionality",
+      "Helped students understand real-world productivity workflows and document automation",
+      "Improved technical communication, presentation clarity, and 1-on-1 problem resolution",
+      "Guided engineering peers through laboratory evaluations and practical exercises",
     ],
-    skills: ["Productivity Workflows", "Excel Data Processing", "Presentation Skills", "Peer Mentorship"],
+    skills: ["Excel Data Workflows", "PowerPoint & Word", "Technical Communication", "Practical Demonstrations"],
   },
 ];
 

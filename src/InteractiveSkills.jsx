@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  Monitor, Server, Database, Code2, Cpu, Sparkles, Layers, ArrowRight
+  Monitor, Server, Database, Code2, Cpu, Wrench, Sparkles, Layers, ArrowRight
 } from "lucide-react";
 
 const TECHNICAL_ARSENAL_CATEGORIES = [
@@ -29,16 +29,24 @@ const TECHNICAL_ARSENAL_CATEGORIES = [
     skills: ["JavaScript", "Python", "Java", "C"],
   },
   {
-    id: "tools-cs",
-    title: "TOOLS / CS",
+    id: "core-cs",
+    title: "CORE CS",
     icon: Cpu,
+    skills: [
+      "Data Structures",
+      "Algorithms",
+      "DBMS",
+      "Software Engineering",
+    ],
+  },
+  {
+    id: "tools",
+    title: "TOOLS",
+    icon: Wrench,
     skills: [
       "Git",
       "GitHub",
-      "Data Structures",
-      "Algorithms",
       "Office Automation Tools",
-      "DBMS",
     ],
   },
 ];
@@ -108,7 +116,7 @@ export function InteractiveSkills() {
           <Layers size={13} /> TECHNICAL SKILLS
         </span>
         <h2 id="skills-heading" className="section-title-v2">
-          Engineered competencies &amp; technologies.
+          Technical Arsenal
         </h2>
         <p className="section-subtitle-v2 mx-auto">
           Technologies used across coursework, full-stack project builds, and university laboratory teaching assistant appointments.

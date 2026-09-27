@@ -25,7 +25,7 @@ export function OrbitalProjects({ projects, onSelectProject }) {
           <Layers size={13} /> SELECTED WORK
         </span>
         <h2 id="projects-heading" className="section-title-v2">
-          Software applications built from requirement to deployment.
+          Building real software, from interfaces to APIs, databases and real-world workflows.
         </h2>
         <p className="section-subtitle-v2 mx-auto">
           Full-stack web applications engineered with React, Next.js, Node.js, Express, ASP.NET Core, MongoDB, and SQL Server.
@@ -40,9 +40,9 @@ export function OrbitalProjects({ projects, onSelectProject }) {
           <div className="featured-card-inner">
             <div className="featured-grid">
               
-              {/* Visual Browser Preview Column */}
+              {/* Visual 16:9 Browser Preview Column (Occupies ~60% visual space) */}
               <div className="featured-preview-col">
-                <div className="browser-mockup-frame">
+                <div className="browser-mockup-frame frame-16-9">
                   <div className="browser-top-bar">
                     <div className="browser-dots">
                       <span className="b-dot dot-red" />
@@ -57,7 +57,7 @@ export function OrbitalProjects({ projects, onSelectProject }) {
 
                   <div className="browser-content-canvas sp-polymers-canvas">
                     <div className="canvas-header-strip">
-                      <div className="canvas-logo-mark">SP POLYMERS</div>
+                      <div className="canvas-logo-mark">KHODAL INDUSTRIES</div>
                       <div className="canvas-nav-links">
                         <span>Catalog</span>
                         <span>Grades</span>
@@ -68,8 +68,8 @@ export function OrbitalProjects({ projects, onSelectProject }) {
 
                     <div className="canvas-hero-banner">
                       <div className="banner-tag">PLASTIC RAW MATERIALS MANUFACTURER</div>
-                      <h4 className="banner-heading">Polymer Raw Materials &amp; Industrial Grades</h4>
-                      <p className="banner-desc">High-density Polyethylene (HDPE), Polypropylene (PP), &amp; Custom Compounds</p>
+                      <h4 className="banner-heading">Engineering Tomorrow&apos;s Plastic Solutions</h4>
+                      <p className="banner-desc">High-density Polyethylene (HDPE), Polypropylene (PP), &amp; Polymer Compounds</p>
                     </div>
 
                     <div className="canvas-catalog-preview">
@@ -80,7 +80,7 @@ export function OrbitalProjects({ projects, onSelectProject }) {
                       </div>
                       <div className="catalog-mini-card">
                         <span className="mini-chip">PP Injection</span>
-                        <div className="mini-title">Molding Grade Homopolymer</div>
+                        <div className="mini-title">Molding Homopolymer</div>
                         <span className="mini-status">In Stock</span>
                       </div>
                       <div className="catalog-mini-card">
@@ -103,18 +103,21 @@ export function OrbitalProjects({ projects, onSelectProject }) {
               {/* Information & Details Column */}
               <div className="featured-info-col">
                 <div className="project-badge-header">
-                  <span className="featured-num-tag">PROJECT 01 // FEATURED WORK</span>
+                  <span className="featured-num-tag">01 / FEATURED PROJECT</span>
                   <span className="live-status-pill">
                     <Sparkles size={12} /> LIVE DEMO
                   </span>
                 </div>
 
-                <h3 className="featured-project-title">{p1.title}</h3>
-                <p className="featured-project-sub">{p1.description}</p>
+                <h3 className="featured-project-title">SP POLYMERS</h3>
+                <p className="featured-project-tagline">Khodal Industries — Industrial B2B Platform</p>
+                <p className="featured-project-sub">
+                  Built a production-style platform for showcasing plastic raw materials, manufacturing capabilities and product information.
+                </p>
 
                 {/* Key Engineering Highlights */}
                 <div className="engineering-highlights-box">
-                  <span className="highlights-label">ENGINEERING HIGHLIGHTS</span>
+                  <span className="highlights-label">ENGINEERING WORK</span>
                   <ul className="highlights-list">
                     <li>
                       <CheckCircle2 size={14} className="highlight-icon" />
@@ -122,7 +125,7 @@ export function OrbitalProjects({ projects, onSelectProject }) {
                     </li>
                     <li>
                       <CheckCircle2 size={14} className="highlight-icon" />
-                      <span>Structured product grade taxonomy &amp; specifications catalog browser</span>
+                      <span>Structured product grade taxonomy &amp; material specifications catalog</span>
                     </li>
                     <li>
                       <CheckCircle2 size={14} className="highlight-icon" />
@@ -148,10 +151,9 @@ export function OrbitalProjects({ projects, onSelectProject }) {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="btn-v2 btn-v2-primary"
-                      aria-label="Open SP Polymers Live Demo on Vercel"
+                      aria-label="View SP Polymers Live Project on Vercel"
                     >
-                      <span>VIEW LIVE</span>
-                      <ArrowUpRight size={15} />
+                      <span>VIEW LIVE ↗</span>
                     </a>
                   )}
 
@@ -164,7 +166,7 @@ export function OrbitalProjects({ projects, onSelectProject }) {
                       aria-label="View SP Polymers source code on GitHub"
                     >
                       <GithubIcon size={15} />
-                      <span>GITHUB</span>
+                      <span>GITHUB ↗</span>
                     </a>
                   )}
 
@@ -172,7 +174,7 @@ export function OrbitalProjects({ projects, onSelectProject }) {
                     type="button"
                     onClick={() => onSelectProject("sp-polymers")}
                     className="btn-v2 btn-v2-ghost"
-                    aria-label="View full case study for SP Polymers"
+                    aria-label="View full details for SP Polymers"
                   >
                     <span>Full Case Study</span>
                     <ChevronRight size={15} />
@@ -201,8 +203,8 @@ export function OrbitalProjects({ projects, onSelectProject }) {
                   <span className="b-dot dot-green" />
                 </div>
                 <div className="browser-url-bar">
-                  <span className="url-lock">localhost:</span>
-                  <span className="url-text">3000/dashboard/tickets</span>
+                  <span className="url-lock">https://</span>
+                  <span className="url-text">rms-app.local/dashboard</span>
                 </div>
               </div>
 
@@ -237,8 +239,10 @@ export function OrbitalProjects({ projects, onSelectProject }) {
                 <span className="grid-cat-pill">FULL-STACK ENTERPRISE</span>
               </div>
 
-              <h3 className="grid-project-title">{p2.title}</h3>
-              <p className="grid-project-desc">{p2.description}</p>
+              <h3 className="grid-project-title">SERVICE REQUEST MANAGEMENT SYSTEM</h3>
+              <p className="grid-project-desc">
+                Full-stack service request management platform built with React, Node.js, Express and MongoDB for organizational grievance tracking and workflow resolution.
+              </p>
 
               <div className="grid-highlights-list">
                 <div className="grid-highlight-item">
@@ -273,7 +277,7 @@ export function OrbitalProjects({ projects, onSelectProject }) {
                     aria-label="View Service Request Management System source code on GitHub"
                   >
                     <GithubIcon size={14} />
-                    <span>GITHUB</span>
+                    <span>GITHUB ↗</span>
                   </a>
                 )}
                 <button
@@ -301,14 +305,14 @@ export function OrbitalProjects({ projects, onSelectProject }) {
                   <span className="b-dot dot-green" />
                 </div>
                 <div className="browser-url-bar">
-                  <span className="url-lock">portal.univ:</span>
-                  <span className="url-text">443/projects/evaluations</span>
+                  <span className="url-lock">https://</span>
+                  <span className="url-text">spms.univ.edu/evaluations</span>
                 </div>
               </div>
 
               <div className="browser-content-canvas academic-mgmt-canvas">
                 <div className="spms-mini-header">
-                  <div className="spms-logo"><Laptop size={13} /> ACADEMIC PROJECT PORTAL</div>
+                  <div className="spms-logo"><Laptop size={13} /> STUDENT PROJECT SYSTEM</div>
                   <span className="spms-role-badge">Faculty Evaluator</span>
                 </div>
 
@@ -342,8 +346,10 @@ export function OrbitalProjects({ projects, onSelectProject }) {
                 <span className="grid-cat-pill">ACADEMIC GOVERNANCE</span>
               </div>
 
-              <h3 className="grid-project-title">{p3.title}</h3>
-              <p className="grid-project-desc">{p3.description}</p>
+              <h3 className="grid-project-title">STUDENT PROJECT MANAGEMENT SYSTEM</h3>
+              <p className="grid-project-desc">
+                Role-Based Access Control (RBAC) academic governance platform powering Student, Faculty, and Admin portals for university milestone management and grading.
+              </p>
 
               <div className="grid-highlights-list">
                 <div className="grid-highlight-item">
@@ -378,7 +384,7 @@ export function OrbitalProjects({ projects, onSelectProject }) {
                     aria-label="View Student Project Management System source code on GitHub"
                   >
                     <GithubIcon size={14} />
-                    <span>GITHUB</span>
+                    <span>GITHUB ↗</span>
                   </a>
                 )}
                 <button
