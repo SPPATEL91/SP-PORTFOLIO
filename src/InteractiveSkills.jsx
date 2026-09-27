@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  Monitor, Server, Database, Code2, Cpu, Wrench, Sparkles, Layers, ArrowRight
+  Monitor, Server, Database, Code2, Cpu, Sparkles, Layers, ArrowRight
 } from "lucide-react";
 
 const TECHNICAL_ARSENAL_CATEGORIES = [
@@ -8,7 +8,7 @@ const TECHNICAL_ARSENAL_CATEGORIES = [
     id: "frontend",
     title: "FRONTEND",
     icon: Monitor,
-    skills: ["React", "Next.js", "JavaScript", "HTML", "CSS"],
+    skills: ["React", "Next.js", "HTML", "CSS", "JavaScript"],
   },
   {
     id: "backend",
@@ -20,7 +20,7 @@ const TECHNICAL_ARSENAL_CATEGORIES = [
     id: "database",
     title: "DATABASE",
     icon: Database,
-    skills: ["MongoDB", "SQL Server", "MySQL"],
+    skills: ["MongoDB", "SQL Server"],
   },
   {
     id: "languages",
@@ -29,16 +29,17 @@ const TECHNICAL_ARSENAL_CATEGORIES = [
     skills: ["JavaScript", "Python", "Java", "C"],
   },
   {
-    id: "core-cs",
-    title: "CORE CS",
+    id: "tools-cs",
+    title: "TOOLS / CS",
     icon: Cpu,
-    skills: ["Data Structures", "Algorithms", "DBMS", "OOP", "Computer Networks"],
-  },
-  {
-    id: "tools",
-    title: "TOOLS",
-    icon: Wrench,
-    skills: ["Git", "GitHub", "Office Automation Tools"],
+    skills: [
+      "Git",
+      "GitHub",
+      "Data Structures",
+      "Algorithms",
+      "Office Automation Tools",
+      "DBMS",
+    ],
   },
 ];
 
@@ -49,7 +50,7 @@ const SKILL_RELATIONS = {
   },
   "Next.js": {
     related: ["React", "JavaScript", "Node.js", "HTML", "CSS"],
-    insight: "SSR/ISR framework powering optimized static delivery and SEO for the SP Polymers catalog live on Vercel.",
+    insight: "SSR/ISR framework powering optimized static delivery and SEO for SP Polymers catalog on Vercel.",
   },
   "JavaScript": {
     related: ["React", "Next.js", "Node.js", "Express", "NestJS"],
@@ -64,7 +65,7 @@ const SKILL_RELATIONS = {
     insight: "REST routing framework powering Service Request Management System backend with CRUD endpoints.",
   },
   "ASP.NET / .NET": {
-    related: ["SQL Server", "OOP", "Data Structures", "DBMS"],
+    related: ["SQL Server", "DBMS", "Data Structures"],
     insight: "Enterprise backend framework powering C# controllers, dependency injection, and RBAC governance for SPMS.",
   },
   "MongoDB": {
@@ -72,7 +73,7 @@ const SKILL_RELATIONS = {
     insight: "Document database handling flexible JSON schemas, indexed queries, and request status lifecycles.",
   },
   "SQL Server": {
-    related: ["ASP.NET / .NET", "DBMS", "OOP"],
+    related: ["ASP.NET / .NET", "DBMS"],
     insight: "Relational database enforcing 3NF schema normalization, ACID compliance, and stored procedures.",
   },
   "Data Structures": {
@@ -84,7 +85,7 @@ const SKILL_RELATIONS = {
     insight: "Computational efficiency, sorting, searching, time/space complexity analysis, and optimization.",
   },
   "DBMS": {
-    related: ["SQL Server", "MongoDB", "MySQL", "Computer Networks"],
+    related: ["SQL Server", "MongoDB"],
     insight: "Core database theory taught as TA: ER modeling, normalization to 3NF, SQL queries, and relational keys.",
   },
   "Git": {
@@ -95,48 +96,23 @@ const SKILL_RELATIONS = {
 
 export function InteractiveSkills() {
   const [hoveredSkill, setHoveredSkill] = useState(null);
-  const [selectedCategory, setSelectedCategory] = useState("all");
 
   const relation = hoveredSkill ? SKILL_RELATIONS[hoveredSkill] : null;
   const relatedList = relation ? relation.related : [];
 
-  const filteredCategories = selectedCategory === "all"
-    ? TECHNICAL_ARSENAL_CATEGORIES
-    : TECHNICAL_ARSENAL_CATEGORIES.filter((c) => c.id === selectedCategory);
-
   return (
-    <div className="skills-system-wrapper" aria-label="Technical Arsenal Ecosystem">
-      
-      {/* Category Filter Navigation */}
-      <div className="skills-concept-banner">
-        <div className="concept-badge">
-          <Layers size={13} /> VERIFIED PROFICIENCY
-        </div>
-        <h3 className="concept-title">TECHNICAL ARSENAL</h3>
-        <p className="concept-sub">
-          Categorized engineering disciplines built through coursework, university lab instruction, and verified projects. Hover any badge to spotlight system connections.
+    <div className="skills-system-wrapper" id="skills" aria-label="Technical Arsenal Ecosystem">
+      {/* Editorial Section Header */}
+      <div className="section-header-v2 text-center">
+        <span className="section-eyebrow-v2">
+          <Layers size={13} /> TECHNICAL SKILLS
+        </span>
+        <h2 id="skills-heading" className="section-title-v2">
+          Engineered competencies &amp; technologies.
+        </h2>
+        <p className="section-subtitle-v2 mx-auto">
+          Technologies used across coursework, full-stack project builds, and university laboratory teaching assistant appointments.
         </p>
-
-        {/* Filter Pills */}
-        <div className="skills-filter-pills" role="tablist" aria-label="Skill Category Filter">
-          <button
-            type="button"
-            className={`filter-pill${selectedCategory === "all" ? " is-active" : ""}`}
-            onClick={() => setSelectedCategory("all")}
-          >
-            All Categories
-          </button>
-          {TECHNICAL_ARSENAL_CATEGORIES.map((cat) => (
-            <button
-              key={cat.id}
-              type="button"
-              className={`filter-pill${selectedCategory === cat.id ? " is-active" : ""}`}
-              onClick={() => setSelectedCategory(cat.id)}
-            >
-              {cat.title}
-            </button>
-          ))}
-        </div>
       </div>
 
       {/* Relational Feedback Bar */}
@@ -148,19 +124,19 @@ export function InteractiveSkills() {
             </span>
             <ArrowRight size={13} className="relation-dock-arrow" />
             <span className="relation-dock-insight">
-              {relation?.insight || "Core engineering competency in full-stack web applications."}
+              {relation?.insight || "Core engineering competency in software development."}
             </span>
           </div>
         ) : (
           <div className="relation-dock-placeholder">
-            <span>Hover any technology badge to inspect architectural integration</span>
+            <span>Hover any technology pill to view application context</span>
           </div>
         )}
       </div>
 
-      {/* Category Grid */}
+      {/* Categorized Skills Grid */}
       <div className="skills-category-grid">
-        {filteredCategories.map(({ id, title, icon: Icon, skills }) => (
+        {TECHNICAL_ARSENAL_CATEGORIES.map(({ id, title, icon: Icon, skills }) => (
           <div key={id} className="skill-discipline-card">
             <div className="discipline-header">
               <div className="discipline-icon">
@@ -188,7 +164,6 @@ export function InteractiveSkills() {
                   >
                     <span className="skill-tag-dot" aria-hidden="true" />
                     <span className="skill-tag-text">{skill}</span>
-                    {isConnected && <span className="skill-tag-badge">LINK</span>}
                   </button>
                 );
               })}

@@ -1,10 +1,10 @@
 import React, { useEffect, useRef } from "react";
 import {
-  ArrowUpRight, FileText, Mail, Terminal, Sparkles, CheckCircle2, ShieldCheck,
-  Code2, Database, Server, Monitor, Cpu, Layers, ArrowDown
+  ArrowUpRight, FileText, Terminal, Sparkles, CheckCircle2, ShieldCheck,
+  Database, Server, Monitor, Cpu
 } from "lucide-react";
 
-function Github({ size = 16, ...p }) {
+function Github({ size = 15, ...p }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
       <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
@@ -13,19 +13,8 @@ function Github({ size = 16, ...p }) {
   );
 }
 
-function Linkedin({ size = 16, ...p }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
-      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-      <rect x="2" y="9" width="4" height="12" /><circle cx="4" cy="4" r="2" />
-    </svg>
-  );
-}
-
-const linkedInUrl = "https://www.linkedin.com/in/smit-pipalava-54b063311";
 const githubUrl = "https://github.com/SPPATEL91";
 const resumeUrl = "/Smit_Pipalava_Resume.pdf";
-const email = "smitpipalva91@gmail.com";
 
 const TECH_STACK_HERO = [
   { name: "React", category: "Frontend" },
@@ -41,7 +30,7 @@ export function HeroSection({ Magnetic }) {
   const profileCardRef = useRef(null);
   const mainContentRef = useRef(null);
 
-  /* Subtle mouse parallax with separated z-planes */
+  /* Subtle mouse movement for clean desktop feel */
   useEffect(() => {
     const isFinePointer = window.matchMedia("(pointer: fine) and (hover: hover)").matches;
     const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -64,10 +53,10 @@ export function HeroSection({ Magnetic }) {
       curY += (targetY - curY) * 0.08;
 
       if (profileCardRef.current) {
-        profileCardRef.current.style.transform = `translate(${curX * 4}px, ${curY * 4}px)`;
+        profileCardRef.current.style.transform = `translate(${curX * 3}px, ${curY * 3}px)`;
       }
       if (mainContentRef.current) {
-        mainContentRef.current.style.transform = `translate(${curX * 1.5}px, ${curY * 1.5}px)`;
+        mainContentRef.current.style.transform = `translate(${curX * 1.2}px, ${curY * 1.2}px)`;
       }
 
       rafId = requestAnimationFrame(render);
@@ -84,8 +73,7 @@ export function HeroSection({ Magnetic }) {
 
   return (
     <section id="home" ref={heroRef} className="hero-section-v2" aria-label="Hero Introduction">
-      
-      {/* Restrained Ambient Radial Glow */}
+      {/* Restrained Light Ambient Glow */}
       <div className="hero-ambient-glow" aria-hidden="true" />
 
       <div className="container hero-container-v2">
@@ -96,7 +84,7 @@ export function HeroSection({ Magnetic }) {
           <div className="hero-stage-1">
             <div className="hero-status-pill">
               <span className="status-indicator-dot" aria-hidden="true" />
-              <span className="status-indicator-text">FULL-STACK DEVELOPER</span>
+              <span className="status-indicator-text">FULL-STACK DEVELOPER &amp; CS STUDENT</span>
             </div>
             <div className="hero-university-tag">
               <Terminal size={12} />
@@ -106,17 +94,17 @@ export function HeroSection({ Magnetic }) {
 
           {/* Name Headline */}
           <h1 className="hero-display-name hero-stage-2">
-            SMIT PIPALAVA
+            Smit Pipalava
           </h1>
 
-          {/* Tagline Positioning Statement */}
+          {/* Value Proposition Statement */}
           <p className="hero-display-role hero-stage-3">
-            &ldquo;Building real-world web systems from interface to backend.&rdquo;
+            &ldquo;I build complete web applications — from polished interfaces to APIs, databases, and real-world workflows.&rdquo;
           </p>
 
           {/* Bio Description */}
           <p className="hero-display-bio hero-stage-4">
-            B.Tech Computer Science &amp; Engineering student at Darshan University with an 8.87 CGPA. I build complete web applications using React, Next.js, Node.js, .NET and modern databases.
+            Computer Science &amp; Engineering student focused on building reliable software systems with React, Next.js, Node.js, Express, ASP.NET Core, and MongoDB/SQL Server.
           </p>
 
           {/* CTA Buttons */}
@@ -126,20 +114,20 @@ export function HeroSection({ Magnetic }) {
               <ArrowUpRight size={16} />
             </Magnetic>
 
-            <Magnetic as="a" href={resumeUrl} target="_blank" rel="noopener noreferrer" download="Smit_Pipalava_Resume.pdf" className="btn-v2 btn-v2-secondary" aria-label="Download Resume">
-              <FileText size={15} />
-              <span>DOWNLOAD RESUME</span>
-            </Magnetic>
-
-            <Magnetic as="a" href={githubUrl} target="_blank" rel="noopener noreferrer" className="btn-v2 btn-v2-ghost" aria-label="View GitHub Profile">
+            <Magnetic as="a" href={githubUrl} target="_blank" rel="noopener noreferrer" className="btn-v2 btn-v2-secondary" aria-label="View GitHub Profile">
               <Github size={15} />
               <span>GITHUB</span>
+            </Magnetic>
+
+            <Magnetic as="a" href={resumeUrl} target="_blank" rel="noopener noreferrer" download="Smit_Pipalava_Resume.pdf" className="btn-v2 btn-v2-ghost" aria-label="Download Resume">
+              <FileText size={15} />
+              <span>RESUME</span>
             </Magnetic>
           </div>
 
           {/* Technology Stack Beneath Hero */}
           <div className="hero-tech-stack-strip hero-stage-6">
-            <span className="tech-stack-label">TECHNOLOGY STACK:</span>
+            <span className="tech-stack-label">CORE STACK:</span>
             <div className="tech-stack-badges">
               {TECH_STACK_HERO.map(({ name, category }) => (
                 <div key={name} className="hero-tech-badge">
@@ -153,7 +141,7 @@ export function HeroSection({ Magnetic }) {
 
         </div>
 
-        {/* Right-Side Animated Technical Visual */}
+        {/* Right-Side Technical Profile visual */}
         <div ref={profileCardRef} className="hero-profile-column">
           <div className="developer-profile-card">
             
@@ -161,7 +149,7 @@ export function HeroSection({ Magnetic }) {
             <div className="profile-telemetry-header">
               <div className="telemetry-live-pill">
                 <span className="telemetry-dot" aria-hidden="true" />
-                <span>ONLINE · RAJKOT, GUJARAT</span>
+                <span>RAJKOT, GUJARAT</span>
               </div>
               <span className="telemetry-academic-score">CGPA 8.87 / 10.0</span>
             </div>
@@ -179,16 +167,16 @@ export function HeroSection({ Magnetic }) {
               </div>
             </div>
 
-            {/* Animated Technical Visual Dock */}
+            {/* Architecture Node Flow Dock */}
             <div className="profile-architecture-dock">
               <div className="profile-dock-header">
                 <span className="dock-title">
-                  <Cpu size={12} /> SYSTEM CONDUIT ENGINE
+                  <Cpu size={12} /> FULL-STACK ARCHITECTURE
                 </span>
-                <span className="dock-sub">Verified Execution</span>
+                <span className="dock-sub">Verified Codebase</span>
               </div>
 
-              {/* Animated Interactive Node Flow */}
+              {/* Node Flow */}
               <div className="hero-animated-visual-nodes">
                 <div className="visual-node node-client">
                   <Monitor size={14} />
@@ -210,7 +198,7 @@ export function HeroSection({ Magnetic }) {
               <div className="profile-verified-strip">
                 <div className="verified-badge-item">
                   <ShieldCheck size={13} className="verified-check-icon" />
-                  <span>Live on Vercel (SP Polymers)</span>
+                  <span>Live Vercel Demo (SP Polymers)</span>
                 </div>
                 <div className="verified-badge-item">
                   <CheckCircle2 size={13} className="verified-check-icon" />

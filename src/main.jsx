@@ -16,6 +16,7 @@ import { OrbitalProjects } from "./OrbitalProjects";
 import { InteractiveSkills } from "./InteractiveSkills";
 import { ExperienceTimeline } from "./ExperienceTimeline";
 import { HackathonFinalist } from "./HackathonFinalist";
+import { ProofMetrics } from "./ProofMetrics";
 import { ArchitectureFlow } from "./ArchitectureFlow";
 import { DeveloperTerminal } from "./DeveloperTerminal";
 import { CommandPalette } from "./CommandPalette";
@@ -360,6 +361,9 @@ export function App() {
 
         {/* 1. HERO SECTION */}
         <HeroSection Magnetic={Magnetic} />
+
+        {/* 2. ENGINEERING HIGHLIGHTS */}
+        <ProofMetrics />
 
         {/* 2. CORE DISCIPLINES (WHAT I BUILD) */}
         <section className="section-v2 section-alt-v2" aria-labelledby="capabilities-heading">

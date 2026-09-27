@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import {
-  ExternalLink, ArrowUpRight, Layers, CheckCircle2, ChevronRight, Sparkles, Eye, Code2
+  ArrowUpRight, Layers, CheckCircle2, ChevronRight, Sparkles, ShieldCheck, Database, Server, Terminal, Laptop
 } from "lucide-react";
 
-function Github({ size = 16, ...p }) {
+function GithubIcon({ size = 15, ...props }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...p}>
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
       <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
       <path d="M9 18c-4.51 2-5-2-7-2" />
     </svg>
@@ -13,293 +13,389 @@ function Github({ size = 16, ...p }) {
 }
 
 export function OrbitalProjects({ projects, onSelectProject }) {
-  const containerRef = useRef(null);
-  const [isHoveringZone, setIsHoveringZone] = useState(false);
-  const [activeHoverId, setActiveHoverId] = useState(null);
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
-  const [orbitAngle, setOrbitAngle] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
-
-  // Check breakpoint & fine pointer
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 992);
-    };
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
-
-  // Orbit animation loop
-  useEffect(() => {
-    if (isMobile) return undefined;
-    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reducedMotion) return undefined;
-
-    let rafId = null;
-    let lastTime = performance.now();
-
-    const loop = (now) => {
-      const delta = (now - lastTime) / 1000;
-      lastTime = now;
-
-      const speed = isHoveringZone ? 0.05 : 0.22;
-      const direction = mouseOffset.x < 0 ? -1 : 1;
-
-      setOrbitAngle((prev) => (prev + delta * speed * direction) % (Math.PI * 2));
-      rafId = requestAnimationFrame(loop);
-    };
-
-    rafId = requestAnimationFrame(loop);
-    return () => {
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, [isHoveringZone, mouseOffset.x, isMobile]);
-
-  // Track mouse coordinates over interaction zone
-  const handleMouseMove = (e) => {
-    if (!containerRef.current || isMobile) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    const normX = (e.clientX - centerX) / (rect.width / 2);
-    const normY = (e.clientY - centerY) / (rect.height / 2);
-
-    setMouseOffset({ x: Math.max(-1, Math.min(1, normX)), y: Math.max(-1, Math.min(1, normY)) });
-  };
-
-  const projectList = Object.values(projects);
+  const p1 = projects["sp-polymers"];
+  const p2 = projects["request-management"];
+  const p3 = projects["student-projects"];
 
   return (
-    <div className="orbital-projects-wrapper">
-      
-      {/* Editorial Header */}
+    <div className="selected-work-wrapper" id="projects">
+      {/* Editorial Section Header */}
       <div className="section-header-v2 text-center">
         <span className="section-eyebrow-v2">
-          <Layers size={12} /> SELECTED WORK
+          <Layers size={13} /> SELECTED WORK
         </span>
         <h2 id="projects-heading" className="section-title-v2">
-          Projects where I turned requirements into working software.
+          Software applications built from requirement to deployment.
         </h2>
         <p className="section-subtitle-v2 mx-auto">
-          Hover over the orbital interaction zone to inspect software systems built for plastic raw materials manufacturing, enterprise service requests, and university governance.
+          Full-stack web applications engineered with React, Next.js, Node.js, Express, ASP.NET Core, MongoDB, and SQL Server.
         </p>
       </div>
 
-      {/* Flagship Highlight Box for SP Polymers */}
-      {projects["sp-polymers"] && (
-        <div className="flagship-case-study-hero">
-          <div className="flagship-grid">
-            
-            {/* Visual Preview Side */}
-            <div className="flagship-visual-container">
-              <div className="flagship-visual-mockup">
-                <div className="mockup-browser-bar">
-                  <span className="dot dot-red" />
-                  <span className="dot dot-yellow" />
-                  <span className="dot dot-green" />
-                  <span className="mockup-url">khodal-industries.vercel.app</span>
-                </div>
+      {/* ========================================================= */}
+      {/* PROJECT 01 — FEATURED PROJECT (SP POLYMERS)              */}
+      {/* ========================================================= */}
+      {p1 && (
+        <div className="featured-project-card">
+          <div className="featured-card-inner">
+            <div className="featured-grid">
+              
+              {/* Visual Browser Preview Column */}
+              <div className="featured-preview-col">
+                <div className="browser-mockup-frame">
+                  <div className="browser-top-bar">
+                    <div className="browser-dots">
+                      <span className="b-dot dot-red" />
+                      <span className="b-dot dot-yellow" />
+                      <span className="b-dot dot-green" />
+                    </div>
+                    <div className="browser-url-bar">
+                      <span className="url-lock">https://</span>
+                      <span className="url-text">khodal-industries.vercel.app</span>
+                    </div>
+                  </div>
 
-                <div className="mockup-content-preview">
-                  <div className="flagship-monogram">SP POLYMERS</div>
-                  <div className="flagship-sub">Plastic Raw Materials &amp; Industrial Catalog Platform</div>
-                  <div className="flagship-badge-row">
-                    <span className="badge-pill">React</span>
-                    <span className="badge-pill">Next.js</span>
-                    <span className="badge-pill">Node.js</span>
-                    <span className="badge-pill">Vercel Live</span>
+                  <div className="browser-content-canvas sp-polymers-canvas">
+                    <div className="canvas-header-strip">
+                      <div className="canvas-logo-mark">SP POLYMERS</div>
+                      <div className="canvas-nav-links">
+                        <span>Catalog</span>
+                        <span>Grades</span>
+                        <span>Quotes</span>
+                        <span>Contact</span>
+                      </div>
+                    </div>
+
+                    <div className="canvas-hero-banner">
+                      <div className="banner-tag">PLASTIC RAW MATERIALS MANUFACTURER</div>
+                      <h4 className="banner-heading">Polymer Raw Materials &amp; Industrial Grades</h4>
+                      <p className="banner-desc">High-density Polyethylene (HDPE), Polypropylene (PP), &amp; Custom Compounds</p>
+                    </div>
+
+                    <div className="canvas-catalog-preview">
+                      <div className="catalog-mini-card">
+                        <span className="mini-chip">HDPE 100</span>
+                        <div className="mini-title">Pipe Grade Compound</div>
+                        <span className="mini-status">In Stock</span>
+                      </div>
+                      <div className="catalog-mini-card">
+                        <span className="mini-chip">PP Injection</span>
+                        <div className="mini-title">Molding Grade Homopolymer</div>
+                        <span className="mini-status">In Stock</span>
+                      </div>
+                      <div className="catalog-mini-card">
+                        <span className="mini-chip">LLDPE Film</span>
+                        <div className="mini-title">Blown Film Grade</div>
+                        <span className="mini-status">Verified Spec</span>
+                      </div>
+                    </div>
+
+                    <div className="canvas-footer-bar">
+                      <span className="canvas-live-badge">
+                        <span className="live-dot" /> LIVE ON VERCEL
+                      </span>
+                      <span className="canvas-tech-tag">React · Next.js · Node.js</span>
+                    </div>
                   </div>
                 </div>
               </div>
+
+              {/* Information & Details Column */}
+              <div className="featured-info-col">
+                <div className="project-badge-header">
+                  <span className="featured-num-tag">PROJECT 01 // FEATURED WORK</span>
+                  <span className="live-status-pill">
+                    <Sparkles size={12} /> LIVE DEMO
+                  </span>
+                </div>
+
+                <h3 className="featured-project-title">{p1.title}</h3>
+                <p className="featured-project-sub">{p1.description}</p>
+
+                {/* Key Engineering Highlights */}
+                <div className="engineering-highlights-box">
+                  <span className="highlights-label">ENGINEERING HIGHLIGHTS</span>
+                  <ul className="highlights-list">
+                    <li>
+                      <CheckCircle2 size={14} className="highlight-icon" />
+                      <span>Sub-second initial paint with Next.js Incremental Static Regeneration (ISR)</span>
+                    </li>
+                    <li>
+                      <CheckCircle2 size={14} className="highlight-icon" />
+                      <span>Structured product grade taxonomy &amp; specifications catalog browser</span>
+                    </li>
+                    <li>
+                      <CheckCircle2 size={14} className="highlight-icon" />
+                      <span>Integrated commercial quotation inquiry &amp; sample request workflows</span>
+                    </li>
+                  </ul>
+                </div>
+
+                {/* Tech Badges */}
+                <div className="featured-tech-row">
+                  {p1.techBadges.map((badge) => (
+                    <span key={badge} className="featured-tech-badge">
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+
+                {/* Actions Row */}
+                <div className="featured-actions-row">
+                  {p1.liveUrl && (
+                    <a
+                      href={p1.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-v2 btn-v2-primary"
+                      aria-label="Open SP Polymers Live Demo on Vercel"
+                    >
+                      <span>VIEW LIVE</span>
+                      <ArrowUpRight size={15} />
+                    </a>
+                  )}
+
+                  {p1.githubUrl && (
+                    <a
+                      href={p1.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="btn-v2 btn-v2-secondary"
+                      aria-label="View SP Polymers source code on GitHub"
+                    >
+                      <GithubIcon size={15} />
+                      <span>GITHUB</span>
+                    </a>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => onSelectProject("sp-polymers")}
+                    className="btn-v2 btn-v2-ghost"
+                    aria-label="View full case study for SP Polymers"
+                  >
+                    <span>Full Case Study</span>
+                    <ChevronRight size={15} />
+                  </button>
+                </div>
+              </div>
+
             </div>
-
-            {/* Case Study Details Side */}
-            <div className="flagship-details-side">
-              <div className="flagship-eyebrow">
-                <Sparkles size={13} /> LIVE VERCEL PROJECT
-              </div>
-              <h3 className="flagship-title">SP Polymers (Khodal Industries)</h3>
-              <p className="flagship-description">
-                Industrial B2B web catalog platform engineered for plastic raw materials presentation. Deployed live on Vercel.
-              </p>
-
-              {/* Challenge - Solution - Engineering */}
-              <div className="flagship-breakdown-list">
-                <div className="breakdown-item">
-                  <span className="breakdown-tag">CHALLENGE</span>
-                  <p>Industrial product presentation requiring an intuitive catalog to inspect material grades, specs, and inquiry workflows.</p>
-                </div>
-                <div className="breakdown-item">
-                  <span className="breakdown-tag">SOLUTION</span>
-                  <p>Built a fast static Next.js platform with zero layout shifts, structured product grade taxonomies, and instant catalog exploration.</p>
-                </div>
-                <div className="breakdown-item">
-                  <span className="breakdown-tag">ENGINEERING WORK</span>
-                  <p>Implemented sub-second initial paint with Next.js ISR, OpenGraph metadata, JSON-LD schemas, and responsive CSS grid structures deployed on Vercel.</p>
-                </div>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flagship-actions">
-                <a
-                  href="https://khodal-industries-ma1m-q68gbqe9n-sppatel8.vercel.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-v2 btn-v2-primary"
-                >
-                  <span>Live Project</span>
-                  <ArrowUpRight size={15} />
-                </a>
-                <a
-                  href="https://github.com/SPPATEL91/Khodal-Industries-"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-v2 btn-v2-secondary"
-                >
-                  <Github size={15} />
-                  <span>View Code</span>
-                </a>
-                <button
-                  type="button"
-                  onClick={() => onSelectProject("sp-polymers")}
-                  className="btn-v2 btn-v2-ghost"
-                >
-                  <span>Full Case Study</span>
-                  <ChevronRight size={15} />
-                </button>
-              </div>
-            </div>
-
           </div>
         </div>
       )}
 
-      {/* 3-Project Interactive Orbit Area (Desktop) vs Stacked (Mobile) */}
-      {!isMobile ? (
-        <div
-          ref={containerRef}
-          className="orbit-stage-container"
-          onMouseEnter={() => setIsHoveringZone(true)}
-          onMouseLeave={() => {
-            setIsHoveringZone(false);
-            setActiveHoverId(null);
-          }}
-          onMouseMove={handleMouseMove}
-          aria-label="Interactive 3-Project Orbital Showcase"
-        >
-          {/* Orbital Guidelines */}
-          <div className={`orbit-path-ring${isHoveringZone ? " is-expanded" : ""}`} aria-hidden="true" />
+      {/* ========================================================= */}
+      {/* PROJECTS 02 & 03 GRID                                     */}
+      {/* ========================================================= */}
+      <div className="secondary-projects-grid">
+        
+        {/* ---------------- PROJECT 02 ---------------- */}
+        {p2 && (
+          <div className="grid-project-card">
+            <div className="browser-mockup-frame frame-compact">
+              <div className="browser-top-bar">
+                <div className="browser-dots">
+                  <span className="b-dot dot-red" />
+                  <span className="b-dot dot-yellow" />
+                  <span className="b-dot dot-green" />
+                </div>
+                <div className="browser-url-bar">
+                  <span className="url-lock">localhost:</span>
+                  <span className="url-text">3000/dashboard/tickets</span>
+                </div>
+              </div>
 
-          <div className="orbit-center-badge">
-            <span className="pulse-dot" />
-            <span>{isHoveringZone ? "ORBIT PAUSED · HOVER CARD TO INSPECT" : "APPROACH CURSOR TO EXPAND ORBIT"}</span>
-          </div>
+              <div className="browser-content-canvas request-mgmt-canvas">
+                <div className="rms-mini-header">
+                  <div className="rms-logo"><Server size={13} /> SERVICE REQUEST SYSTEM</div>
+                  <span className="rms-role-badge">Admin Dashboard</span>
+                </div>
 
-          {/* Render 3 Orbiting Project Cards */}
-          <div className="orbit-cards-container">
-            {projectList.map((proj, idx) => {
-              const total = projectList.length;
-              const baseAngle = (idx / total) * Math.PI * 2;
-              const currentAngle = baseAngle + orbitAngle;
-
-              const radiusX = isHoveringZone ? 340 : 60;
-              const radiusY = isHoveringZone ? 160 : 25;
-
-              const x = Math.cos(currentAngle) * radiusX + mouseOffset.x * -25;
-              const y = Math.sin(currentAngle) * radiusY + mouseOffset.y * -15;
-
-              const depthFactor = (Math.sin(currentAngle) + 1) / 2;
-              const scale = isHoveringZone ? 0.9 + depthFactor * 0.18 : 0.85;
-              const zIndex = activeHoverId === proj.id ? 100 : Math.round(depthFactor * 50) + 10;
-
-              const isHovered = activeHoverId === proj.id;
-
-              return (
-                <div
-                  key={proj.id}
-                  className={`orbit-card-item${isHovered ? " is-hovered" : ""}`}
-                  style={{
-                    transform: `translate3d(${x}px, ${y}px, 0px) scale(${scale})`,
-                    zIndex: zIndex,
-                  }}
-                  onMouseEnter={() => setActiveHoverId(proj.id)}
-                  onMouseLeave={() => setActiveHoverId(null)}
-                  onClick={() => onSelectProject(proj.id)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(e) => { if (e.key === "Enter") onSelectProject(proj.id); }}
-                >
-                  <div className="orbit-card-inner">
-                    <div className="orbit-card-header">
-                      <span className="orbit-proj-category">{proj.category}</span>
-                      <span className="orbit-proj-num">0{idx + 1}</span>
-                    </div>
-
-                    <h4 className="orbit-proj-title">{proj.title}</h4>
-                    <p className="orbit-proj-summary">{proj.description}</p>
-
-                    <div className="orbit-proj-badges">
-                      {proj.techBadges.slice(0, 4).map((badge) => (
-                        <span key={badge} className="orbit-badge-chip">{badge}</span>
-                      ))}
-                    </div>
-
-                    <div className="orbit-card-footer">
-                      <span className="orbit-action-text">Explore Case Study</span>
-                      <ChevronRight size={14} />
-                    </div>
+                <div className="rms-tickets-list">
+                  <div className="rms-ticket-row">
+                    <span className="t-id">#TK-1082</span>
+                    <span className="t-title">Network Switch Port Configuration</span>
+                    <span className="t-status status-active">Under Review</span>
+                  </div>
+                  <div className="rms-ticket-row">
+                    <span className="t-id">#TK-1081</span>
+                    <span className="t-title">Database Permission Scope Grant</span>
+                    <span className="t-status status-done">Resolved</span>
                   </div>
                 </div>
-              );
-            })}
-          </div>
-        </div>
-      ) : (
-        /* Mobile Swipeable / Stacked Card Presentation */
-        <div className="mobile-projects-stack">
-          {projectList.map((proj, idx) => (
-            <div key={proj.id} className="mobile-project-card">
-              <div className="mobile-card-header">
-                <span className="mobile-proj-tag">0{idx + 1} // {proj.category}</span>
-              </div>
-              <h3 className="mobile-proj-title">{proj.title}</h3>
-              <p className="mobile-proj-desc">{proj.description}</p>
 
-              <div className="mobile-proj-tech">
-                {proj.techBadges.map((badge) => (
-                  <span key={badge} className="mobile-tech-pill">{badge}</span>
+                <div className="rms-meta-strip">
+                  <span>REST API Controller · MongoDB Persistence · JWT Auth</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid-card-body">
+              <div className="project-badge-header">
+                <span className="grid-num-tag">PROJECT 02</span>
+                <span className="grid-cat-pill">FULL-STACK ENTERPRISE</span>
+              </div>
+
+              <h3 className="grid-project-title">{p2.title}</h3>
+              <p className="grid-project-desc">{p2.description}</p>
+
+              <div className="grid-highlights-list">
+                <div className="grid-highlight-item">
+                  <ShieldCheck size={13} className="accent-blue" />
+                  <span>Role-based dashboards for Users, Staff, and Administrators</span>
+                </div>
+                <div className="grid-highlight-item">
+                  <Terminal size={13} className="accent-blue" />
+                  <span>Stateful ticket lifecycle (Submitted → Assigned → Review → Resolved)</span>
+                </div>
+                <div className="grid-highlight-item">
+                  <Database size={13} className="accent-blue" />
+                  <span>Express REST APIs with input validation &amp; MongoDB schemas</span>
+                </div>
+              </div>
+
+              <div className="grid-tech-row">
+                {p2.techBadges.map((badge) => (
+                  <span key={badge} className="grid-tech-badge">
+                    {badge}
+                  </span>
                 ))}
               </div>
 
-              <div className="mobile-card-actions">
-                <button
-                  type="button"
-                  className="btn-v2 btn-v2-primary w-full"
-                  onClick={() => onSelectProject(proj.id)}
-                >
-                  <span>View Case Study</span>
-                  <ChevronRight size={14} />
-                </button>
-
-                {proj.liveUrl && (
+              <div className="grid-actions-row">
+                {p2.githubUrl && (
                   <a
-                    href={proj.liveUrl}
+                    href={p2.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-v2 btn-v2-secondary w-full"
+                    className="btn-v2 btn-v2-secondary"
+                    aria-label="View Service Request Management System source code on GitHub"
                   >
-                    <span>Live Site</span>
-                    <ArrowUpRight size={14} />
+                    <GithubIcon size={14} />
+                    <span>GITHUB</span>
                   </a>
                 )}
+                <button
+                  type="button"
+                  onClick={() => onSelectProject("request-management")}
+                  className="btn-v2 btn-v2-ghost"
+                  aria-label="View details for Service Request Management System"
+                >
+                  <span>View Details</span>
+                  <ChevronRight size={14} />
+                </button>
               </div>
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+        )}
 
+        {/* ---------------- PROJECT 03 ---------------- */}
+        {p3 && (
+          <div className="grid-project-card">
+            <div className="browser-mockup-frame frame-compact">
+              <div className="browser-top-bar">
+                <div className="browser-dots">
+                  <span className="b-dot dot-red" />
+                  <span className="b-dot dot-yellow" />
+                  <span className="b-dot dot-green" />
+                </div>
+                <div className="browser-url-bar">
+                  <span className="url-lock">portal.univ:</span>
+                  <span className="url-text">443/projects/evaluations</span>
+                </div>
+              </div>
+
+              <div className="browser-content-canvas academic-mgmt-canvas">
+                <div className="spms-mini-header">
+                  <div className="spms-logo"><Laptop size={13} /> ACADEMIC PROJECT PORTAL</div>
+                  <span className="spms-role-badge">Faculty Evaluator</span>
+                </div>
+
+                <div className="spms-milestones-grid">
+                  <div className="spms-milestone-box">
+                    <span className="ms-num">M1</span>
+                    <span className="ms-name">Proposal</span>
+                    <span className="ms-grade">Approved</span>
+                  </div>
+                  <div className="spms-milestone-box">
+                    <span className="ms-num">M2</span>
+                    <span className="ms-name">Mid-Term</span>
+                    <span className="ms-grade">Scored 94/100</span>
+                  </div>
+                  <div className="spms-milestone-box">
+                    <span className="ms-num">M3</span>
+                    <span className="ms-name">Final Defense</span>
+                    <span className="ms-grade">Pending</span>
+                  </div>
+                </div>
+
+                <div className="spms-meta-strip">
+                  <span>ASP.NET Core Web API · SQL Server DB · Claims RBAC</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid-card-body">
+              <div className="project-badge-header">
+                <span className="grid-num-tag">PROJECT 03</span>
+                <span className="grid-cat-pill">ACADEMIC GOVERNANCE</span>
+              </div>
+
+              <h3 className="grid-project-title">{p3.title}</h3>
+              <p className="grid-project-desc">{p3.description}</p>
+
+              <div className="grid-highlights-list">
+                <div className="grid-highlight-item">
+                  <ShieldCheck size={13} className="accent-blue" />
+                  <span>3 Portals: Student Team Workspace, Faculty Hub, Admin Center</span>
+                </div>
+                <div className="grid-highlight-item">
+                  <Terminal size={13} className="accent-blue" />
+                  <span>ASP.NET Core Web API controllers with Claims-based RBAC</span>
+                </div>
+                <div className="grid-highlight-item">
+                  <Database size={13} className="accent-blue" />
+                  <span>SQL Server normalized 3NF database schema &amp; audit history</span>
+                </div>
+              </div>
+
+              <div className="grid-tech-row">
+                {p3.techBadges.map((badge) => (
+                  <span key={badge} className="grid-tech-badge">
+                    {badge}
+                  </span>
+                ))}
+              </div>
+
+              <div className="grid-actions-row">
+                {p3.githubUrl && (
+                  <a
+                    href={p3.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-v2 btn-v2-secondary"
+                    aria-label="View Student Project Management System source code on GitHub"
+                  >
+                    <GithubIcon size={14} />
+                    <span>GITHUB</span>
+                  </a>
+                )}
+                <button
+                  type="button"
+                  onClick={() => onSelectProject("student-projects")}
+                  className="btn-v2 btn-v2-ghost"
+                  aria-label="View details for Student Project Management System"
+                >
+                  <span>View Details</span>
+                  <ChevronRight size={14} />
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
+      </div>
     </div>
   );
 }

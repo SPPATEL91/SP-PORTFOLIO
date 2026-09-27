@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Terminal, FileText, X, Menu, ArrowUpRight } from "lucide-react";
 
 const NAV_ITEMS = [
+  { label: "Home", id: "home" },
   { label: "About", id: "about" },
-  { label: "Work", id: "projects" },
-  { label: "Experience", id: "experience" },
+  { label: "Projects", id: "projects" },
   { label: "Skills", id: "skills" },
-  { label: "Education", id: "education" },
+  { label: "Experience", id: "experience" },
+  { label: "Contact", id: "contact" },
 ];
 
 const resumeUrl = "/Smit_Pipalava_Resume.pdf";

@@ -1,52 +1,54 @@
 import React from "react";
-import { Terminal, CheckCircle2, Calendar, MapPin, Users, BookOpen } from "lucide-react";
+import { Terminal, CheckCircle2, Calendar, MapPin, Users } from "lucide-react";
 
 const EXPERIENCES = [
   {
-    role: "DBMS LAB TEACHING ASSISTANT",
+    role: "DBMS Teaching Assistant",
     institution: "Darshan University",
     location: "Rajkot, Gujarat",
-    target: "~60 Diploma Engineering Students",
+    target: "Guided ~60 Students",
     duration: "Academic Semester Appointment",
     description:
-      "Instructed diploma computer engineering students through relational database management systems, ER diagram design, schema normalization, and practical SQL query execution.",
+      "Served as Teaching Assistant for Database Management Systems (DBMS) lab sessions, responsible for reinforcing relational database theory and hands-on query authoring.",
     responsibilities: [
-      "Instructed ~60 students in weekly database management laboratory sessions",
-      "Explained relational database concepts, ER diagrams, Primary/Foreign keys, and schema normalization to 3NF",
-      "Guided hands-on SQL query authoring (DDL/DML), join operations, and database troubleshooting",
-      "Developed technical communication skills by answering real-time student queries and debugging lab code",
+      "Guided approximately 60 students through weekly database management laboratory practicals",
+      "Explained database concepts, ER modeling, primary/foreign keys, and 3NF schema normalization",
+      "Assisted students with SQL query execution, database joins, and troubleshooting learning friction",
+      "Received positive feedback for clear explanations and supportive practical mentorship",
     ],
-    skills: ["DBMS Instruction", "SQL Concepts", "ER Diagramming", "Troubleshooting", "Technical Communication"],
+    skills: ["DBMS Instruction", "SQL Queries", "Schema Normalization", "Technical Communication"],
   },
   {
-    role: "OFFICE AUTOMATION TOOLS TEACHING ASSISTANT",
+    role: "Office Automation Tools Teaching Assistant",
     institution: "Darshan University",
     location: "Rajkot, Gujarat",
-    target: "Undergraduate Engineering Peers",
+    target: "Instructed ~100 Students",
     duration: "Academic Semester Appointment",
     description:
-      "Delivered practical demonstrations of software automation tools, productivity suites, and desktop workflows for undergraduate engineering students.",
+      "Instructed practical sessions covering desktop productivity suites, structured software workflows, and document processing automation.",
     responsibilities: [
-      "Delivered structured practical software demonstrations and workflow automation lab sessions",
-      "Mentored engineering peers 1-on-1 through complex data processing and document automation exercises",
-      "Strengthened leadership, public presentation, and instructional clarity under active classroom environments",
+      "Taught practical Excel, PowerPoint, and Word functionality in weekly lab demonstrations",
+      "Helped students understand real-world productivity workflows, data formatting, and presentation structure",
+      "Improved technical communication, presentation clarity, and 1-on-1 student problem resolution",
+      "Mentored engineering peers through practical evaluations and workflow exercises",
     ],
-    skills: ["Software Workflows", "Peer Mentorship", "Data Automation", "Instructional Leadership"],
+    skills: ["Productivity Workflows", "Excel Data Processing", "Presentation Skills", "Peer Mentorship"],
   },
 ];
 
 export function ExperienceTimeline() {
   return (
-    <div className="experience-section-wrapper">
-      <div className="section-header-v2">
+    <div className="experience-section-wrapper" id="experience">
+      {/* Editorial Section Header */}
+      <div className="section-header-v2 text-center">
         <span className="section-eyebrow-v2">
-          <Terminal size={12} /> PEDAGOGY &amp; INSTRUCTION
+          <Terminal size={13} /> EXPERIENCE
         </span>
         <h2 id="experience-heading" className="section-title-v2">
-          ENGINEERING EXPERIENCE
+          Teaching Assistant Experience
         </h2>
-        <p className="section-subtitle-v2">
-          Academic teaching assistantships at Darshan University reinforcing core database theory, troubleshooting, and software workflows.
+        <p className="section-subtitle-v2 mx-auto">
+          Academic appointments at Darshan University demonstrating technical leadership, communication, and practical instruction.
         </p>
       </div>
 

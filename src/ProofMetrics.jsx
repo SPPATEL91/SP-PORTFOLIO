@@ -1,138 +1,64 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Award, CheckCircle2, TrendingUp, Users, ShieldCheck, Cpu } from "lucide-react";
+import React from "react";
+import { Award, ShieldCheck, Cpu, Users, Award as AwardIcon } from "lucide-react";
 
-const METRICS_DATA = [
+const HIGHLIGHTS = [
   {
-    target: 8.87,
-    isFloat: true,
-    suffix: "",
-    label: "Academic CGPA",
-    sublabel: "/ 10.0 High Distinction · Darshan Univ",
+    number: "8.87",
+    label: "CGPA",
+    subtext: "High Distinction · Darshan Univ",
     icon: Award,
   },
   {
-    target: 3,
-    isFloat: false,
-    suffix: "+",
-    label: "Enterprise Web Apps",
-    sublabel: "End-to-End Full-Stack Deployments",
+    number: "3",
+    label: "Major Projects",
+    subtext: "End-to-End Full-Stack Systems",
     icon: Cpu,
   },
   {
-    target: 2,
-    isFloat: false,
-    suffix: "",
-    label: "TA Appointments",
-    sublabel: "DBMS & Office Automation Labs",
+    number: "2",
+    label: "Teaching Assistant Roles",
+    subtext: "DBMS & Office Automation Labs",
     icon: ShieldCheck,
   },
   {
-    target: 160,
-    isFloat: false,
-    suffix: "+",
-    label: "Students Mentored",
-    sublabel: "Weekly Practical Lab Instructions",
+    number: "200–300",
+    label: "Hackathon Participants",
+    subtext: "Competitive Student Field",
     icon: Users,
   },
   {
-    target: 3,
-    isFloat: false,
-    prefix: "Stage 0",
-    suffix: " Reached",
-    customText: "Last Stage",
-    label: "Hackathon Participant",
-    sublabel: "Participated & Reached Last Stage (~200-300 Students)",
-    icon: TrendingUp,
-  },
-  {
-    target: 100,
-    isFloat: false,
-    suffix: "%",
-    label: "Vercel Live Status",
-    sublabel: "Live Demo Hosted on Vercel (SP Polymers)",
-    icon: CheckCircle2,
+    number: "Final Round",
+    label: "Hackathon Stage",
+    subtext: "Reached Last Evaluation Round",
+    icon: AwardIcon,
   },
 ];
 
 export function ProofMetrics() {
-  const containerRef = useRef(null);
-  const [hasAnimated, setHasAnimated] = useState(false);
-  const [counts, setCounts] = useState(
-    METRICS_DATA.map((m) => (m.isFloat ? 0.0 : 0))
-  );
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return undefined;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
-          observer.disconnect();
-
-          const duration = 1600; // ms
-          const startTime = performance.now();
-
-          const animate = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            // Ease out cubic: 1 - pow(1 - progress, 3)
-            const easeOut = 1 - Math.pow(1 - progress, 3);
-
-            setCounts(
-              METRICS_DATA.map((m) => {
-                if (m.isFloat) {
-                  return Number((m.target * easeOut).toFixed(2));
-                }
-                return Math.floor(m.target * easeOut);
-              })
-            );
-
-            if (progress < 1) {
-              requestAnimationFrame(animate);
-            } else {
-              setCounts(METRICS_DATA.map((m) => m.target));
-            }
-          };
-
-          requestAnimationFrame(animate);
-        }
-      },
-      { threshold: 0.25 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [hasAnimated]);
-
   return (
-    <div ref={containerRef} className="proof-metrics-grid" aria-label="Verified Track Record Metrics">
-      {METRICS_DATA.map((m, idx) => {
-        const Icon = m.icon;
-        let displayVal;
-        if (m.customText && counts[idx] >= m.target) {
-          displayVal = m.customText;
-        } else if (m.isFloat) {
-          displayVal = counts[idx].toFixed(2) + m.suffix;
-        } else {
-          displayVal = (m.prefix || "") + counts[idx] + m.suffix;
-        }
+    <section className="engineering-highlights-section" aria-label="Engineering Highlights">
+      <div className="container">
+        <div className="highlights-header">
+          <span className="highlights-eyebrow">VERIFIED TRACK RECORD</span>
+          <h3 className="highlights-title">ENGINEERING HIGHLIGHTS</h3>
+        </div>
 
-        return (
-          <div key={m.label} className="proof-metric-card">
-            <div className="proof-card-top">
-              <div className="proof-metric-icon">
-                <Icon size={16} />
+        <div className="highlights-grid">
+          {HIGHLIGHTS.map((item) => {
+            const Icon = item.icon;
+            return (
+              <div key={item.label} className="highlight-metric-card">
+                <div className="metric-icon-box">
+                  <Icon size={16} />
+                </div>
+                <div className="metric-number">{item.number}</div>
+                <div className="metric-label">{item.label}</div>
+                <div className="metric-subtext">{item.subtext}</div>
               </div>
-              <span className="proof-metric-dot" aria-hidden="true" />
-            </div>
-            <div className="proof-number-val">{displayVal}</div>
-            <div className="proof-metric-title">{m.label}</div>
-            <div className="proof-metric-sub">{m.sublabel}</div>
-          </div>
-        );
-      })}
-    </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
