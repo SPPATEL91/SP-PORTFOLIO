@@ -1,15 +1,12 @@
-﻿import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 
 /**
  * PixelGridBackground
- * High-performance HTML5 canvas pixel grid with:
- * - Exponential mouse coordinate lerping
- * - Radial proximity falloff (0-1: strong, 1-3: medium, 3-6: subtle, >6: resting)
- * - Decaying cell energy trail (250-400ms fade)
- * - Soft Cursor Spotlight: subtle ambient glow following cursor
- * - Section-aware intensity & radius modulation
- * - Idle sleep mode (0% CPU when mouse is still)
- * - Touch & prefers-reduced-motion guard (static grid fallback)
+ * High-performance HTML5 Canvas interactive pixel grid tuned for Light & Dark Contrast Sections:
+ * - Refined light grid structure on #F7F9FC
+ * - Fine-pointer and reduced-motion detection
+ * - Cursor proximity illumination using #2563EB (Primary Blue) and #06B6D4 (Cyan)
+ * - 0% CPU overhead when cursor is stationary
  */
 export function PixelGridBackground() {
   const canvasRef = useRef(null);
@@ -28,7 +25,7 @@ export function PixelGridBackground() {
     let height = 0;
     let cols = 0;
     let rows = 0;
-    const CELL_SIZE = 28;
+    const CELL_SIZE = 36;
 
     let gridEnergy = new Float32Array(0);
 
@@ -40,42 +37,13 @@ export function PixelGridBackground() {
     let spotY = -1000;
     let isMouseOver = false;
 
+    // Config for Light Engineering Background
     let currentConfig = {
-      radius: 175,
-      intensity: 0.9,
-      color: "59, 130, 246",
-      accentColor: "6, 182, 212",
+      radius: 180,
+      intensity: 0.65,
+      color: "37, 99, 235", // Primary Accent Blue (#2563EB)
+      accentColor: "6, 182, 212", // Secondary Accent Cyan (#06B6D4)
     };
-
-    const sectionConfigs = {
-      home: { radius: 210, intensity: 1.05, color: "59, 130, 246", accentColor: "6, 182, 212" },
-      projects: { radius: 145, intensity: 0.65, color: "37, 99, 235", accentColor: "6, 182, 212" },
-      about: { radius: 155, intensity: 0.65, color: "59, 130, 246", accentColor: "99, 102, 241" },
-      skills: { radius: 185, intensity: 0.9, color: "6, 182, 212", accentColor: "59, 130, 246" },
-      experience: { radius: 140, intensity: 0.6, color: "59, 130, 246", accentColor: "6, 182, 212" },
-      contact: { radius: 220, intensity: 1.0, color: "6, 182, 212", accentColor: "99, 102, 241" },
-    };
-
-    let sectionObserver = null;
-    if (typeof IntersectionObserver !== "undefined") {
-      sectionObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting && sectionConfigs[entry.target.id]) {
-              currentConfig = sectionConfigs[entry.target.id];
-              wakeLoop();
-            }
-          });
-        },
-        { threshold: 0.25 }
-      );
-
-      const sectionIds = ["home", "projects", "about", "skills", "experience", "contact"];
-      sectionIds.forEach((id) => {
-        const el = document.getElementById(id);
-        if (el) sectionObserver.observe(el);
-      });
-    }
 
     const handleResize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -111,9 +79,9 @@ export function PixelGridBackground() {
     const drawBaseGrid = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Ultra-subtle base grid lines
+      // Crisp, ultra-subtle base grid lines for light theme
       ctx.lineWidth = 1;
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.024)";
+      ctx.strokeStyle = "rgba(11, 18, 32, 0.035)";
 
       ctx.beginPath();
       for (let x = 0; x <= width; x += CELL_SIZE) {
@@ -126,11 +94,11 @@ export function PixelGridBackground() {
       }
       ctx.stroke();
 
-      // Intersection dots
-      ctx.fillStyle = "rgba(255, 255, 255, 0.04)";
+      // Intersection micro-dots
+      ctx.fillStyle = "rgba(11, 18, 32, 0.05)";
       for (let r = 0; r <= rows; r++) {
         for (let c = 0; c <= cols; c++) {
-          ctx.fillRect(c * CELL_SIZE - 0.5, r * CELL_SIZE - 0.5, 1.5, 1.5);
+          ctx.fillRect(c * CELL_SIZE - 0.5, r * CELL_SIZE - 0.5, 1.2, 1.2);
         }
       }
     };
@@ -143,19 +111,18 @@ export function PixelGridBackground() {
       const { radius, intensity, color, accentColor } = currentConfig;
       const cellRadius = radius / CELL_SIZE;
 
-      // Mouse lerping
       const mouseSpeed = Math.hypot(targetX - curX, targetY - curY);
-      curX += (targetX - curX) * 0.16;
-      curY += (targetY - curY) * 0.16;
+      curX += (targetX - curX) * 0.18;
+      curY += (targetY - curY) * 0.18;
       spotX += (curX - spotX) * 0.12;
       spotY += (curY - spotY) * 0.12;
 
-      // Draw subtle cursor spotlight behind content
-      if (isMouseOver && spotX > 0 && spotY > 0) {
-        const spotRadius = radius * 1.4;
+      // Cursor spotlight ambient glow
+      if (isMouseOver && spotX > -50 && spotY > -50) {
+        const spotRadius = radius * 1.35;
         const spotGrad = ctx.createRadialGradient(spotX, spotY, 0, spotX, spotY, spotRadius);
-        spotGrad.addColorStop(0, `rgba(${accentColor}, ${0.075 * intensity})`);
-        spotGrad.addColorStop(0.45, `rgba(${color}, ${0.03 * intensity})`);
+        spotGrad.addColorStop(0, `rgba(${accentColor}, ${0.05 * intensity})`);
+        spotGrad.addColorStop(0.5, `rgba(${color}, ${0.02 * intensity})`);
         spotGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
 
         ctx.fillStyle = spotGrad;
@@ -174,7 +141,7 @@ export function PixelGridBackground() {
       const minR = Math.max(0, Math.floor(curRow - cellRadius - 1));
       const maxR = Math.min(rows - 1, Math.ceil(curRow + cellRadius + 1));
 
-      if (isMouseOver && curX > 0 && curY > 0) {
+      if (isMouseOver && curX > -50 && curY > -50) {
         for (let r = minR; r <= maxR; r++) {
           for (let c = minC; c <= maxC; c++) {
             const cellCenterX = (c + 0.5) * CELL_SIZE;
@@ -183,11 +150,6 @@ export function PixelGridBackground() {
 
             if (dist < radius) {
               const normDist = dist / radius;
-              // Radial falloff:
-              // 0-1 cell: strong
-              // 1-3 cells: medium
-              // 3-6 cells: subtle
-              // >6 cells: fading to 0
               const targetEnergy = Math.pow(Math.max(0, 1 - normDist), 2.2) * intensity;
               const idx = r * cols + c;
               if (targetEnergy > gridEnergy[idx]) {
@@ -198,7 +160,7 @@ export function PixelGridBackground() {
         }
       }
 
-      // Draw active cells
+      // Draw active grid cells
       for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
           const idx = r * cols + c;
@@ -209,10 +171,11 @@ export function PixelGridBackground() {
             const x = c * CELL_SIZE;
             const y = r * CELL_SIZE;
 
-            const isCore = energy > 0.45;
+            const isCore = energy > 0.38;
             const activeRgb = isCore ? accentColor : color;
-            const fillAlpha = energy * 0.22;
-            const strokeAlpha = energy * 0.55;
+
+            const fillAlpha = energy * 0.09;
+            const strokeAlpha = energy * 0.32;
 
             ctx.fillStyle = `rgba(${activeRgb}, ${fillAlpha})`;
             ctx.fillRect(x + 1, y + 1, CELL_SIZE - 2, CELL_SIZE - 2);
@@ -221,21 +184,25 @@ export function PixelGridBackground() {
             ctx.lineWidth = 1;
             ctx.strokeRect(x + 0.5, y + 0.5, CELL_SIZE - 1, CELL_SIZE - 1);
 
-            if (energy > 0.2) {
-              const dotSize = 1.5 + energy * 2;
-              ctx.fillStyle = `rgba(${accentColor}, ${energy * 0.8})`;
-              ctx.fillRect(x + CELL_SIZE / 2 - dotSize / 2, y + CELL_SIZE / 2 - dotSize / 2, dotSize, dotSize);
+            if (energy > 0.22) {
+              const dotSize = 1.3 + energy * 1.8;
+              ctx.fillStyle = `rgba(${accentColor}, ${energy * 0.6})`;
+              ctx.fillRect(
+                x + CELL_SIZE / 2 - dotSize / 2,
+                y + CELL_SIZE / 2 - dotSize / 2,
+                dotSize,
+                dotSize
+              );
             }
 
-            // Exponential decay
-            gridEnergy[idx] *= 0.93;
+            gridEnergy[idx] *= 0.925;
           } else {
             gridEnergy[idx] = 0;
           }
         }
       }
 
-      if (!isMouseOver && maxActiveEnergy < 0.005 && mouseSpeed < 0.5) {
+      if (!isMouseOver && maxActiveEnergy < 0.005 && mouseSpeed < 0.4) {
         isSleeping = true;
       }
     };
@@ -278,7 +245,6 @@ export function PixelGridBackground() {
         document.removeEventListener("mouseleave", handlePointerLeave);
       }
       if (rafId) cancelAnimationFrame(rafId);
-      if (sectionObserver) sectionObserver.disconnect();
     };
   }, []);
 
