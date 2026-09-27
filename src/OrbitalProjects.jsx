@@ -104,12 +104,12 @@ export function OrbitalProjects({ projects, onSelectProject }) {
 
                 <div className="mockup-content-preview">
                   <div className="flagship-monogram">SP POLYMERS</div>
-                  <div className="flagship-sub">Plastic Raw Materials &amp; Industrial Manufacturing Platform</div>
+                  <div className="flagship-sub">Plastic Raw Materials &amp; Industrial Catalog Platform</div>
                   <div className="flagship-badge-row">
                     <span className="badge-pill">React</span>
                     <span className="badge-pill">Next.js</span>
                     <span className="badge-pill">Node.js</span>
-                    <span className="badge-pill">Production SEO</span>
+                    <span className="badge-pill">Vercel Live</span>
                   </div>
                 </div>
               </div>
@@ -118,26 +118,26 @@ export function OrbitalProjects({ projects, onSelectProject }) {
             {/* Case Study Details Side */}
             <div className="flagship-details-side">
               <div className="flagship-eyebrow">
-                <Sparkles size={13} /> FLAGSHIP PRODUCTION PLATFORM
+                <Sparkles size={13} /> LIVE VERCEL PROJECT
               </div>
               <h3 className="flagship-title">SP Polymers (Khodal Industries)</h3>
               <p className="flagship-description">
-                Industrial B2B platform engineered for plastic raw materials and manufacturing operations. Live in active production serving real business clients.
+                Industrial B2B web catalog platform engineered for plastic raw materials presentation. Deployed live on Vercel.
               </p>
 
               {/* Challenge - Solution - Engineering */}
               <div className="flagship-breakdown-list">
                 <div className="breakdown-item">
                   <span className="breakdown-tag">CHALLENGE</span>
-                  <p>Industrial B2B buyers needed an instant catalog to inspect material grades, specs, and request custom quotes without friction.</p>
+                  <p>Industrial product presentation requiring an intuitive catalog to inspect material grades, specs, and inquiry workflows.</p>
                 </div>
                 <div className="breakdown-item">
                   <span className="breakdown-tag">SOLUTION</span>
-                  <p>Built a fast static Next.js platform with zero layout shifts, structured product grade taxonomies, and instant quote inquiry workflows.</p>
+                  <p>Built a fast static Next.js platform with zero layout shifts, structured product grade taxonomies, and instant catalog exploration.</p>
                 </div>
                 <div className="breakdown-item">
                   <span className="breakdown-tag">ENGINEERING WORK</span>
-                  <p>Implemented sub-second initial paint with Next.js ISR, production OpenGraph metadata, JSON-LD schemas, and responsive CSS grid structures.</p>
+                  <p>Implemented sub-second initial paint with Next.js ISR, OpenGraph metadata, JSON-LD schemas, and responsive CSS grid structures deployed on Vercel.</p>
                 </div>
               </div>
 

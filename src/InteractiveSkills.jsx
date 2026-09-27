@@ -49,7 +49,7 @@ const SKILL_RELATIONS = {
   },
   "Next.js": {
     related: ["React", "JavaScript", "Node.js", "HTML", "CSS"],
-    insight: "Production SSR/ISR framework powering optimized static delivery and SEO for Khodal Industries platform.",
+    insight: "SSR/ISR framework powering optimized static delivery and SEO for the SP Polymers catalog live on Vercel.",
   },
   "JavaScript": {
     related: ["React", "Next.js", "Node.js", "Express", "NestJS"],

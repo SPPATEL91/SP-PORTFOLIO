@@ -47,21 +47,21 @@ const projectsData = {
   "sp-polymers": {
     id: "sp-polymers",
     title: "SP Polymers (Khodal Industries)",
-    category: "FLAGSHIP B2B PLATFORM",
+    category: "LIVE VERCEL CATALOG PLATFORM",
     monogram: "SP",
-    techBadges: ["React", "Next.js", "Node.js", "Responsive UI", "Production SEO"],
+    techBadges: ["React", "Next.js", "Node.js", "Responsive UI", "Vercel Live"],
     liveUrl: "https://khodal-industries-ma1m-q68gbqe9n-sppatel8.vercel.app/",
     githubUrl: "https://github.com/SPPATEL91/Khodal-Industries-",
-    description: "Industrial B2B web platform developed for a real plastic raw materials manufacturer — live in active production for Khodal Industries.",
+    description: "Industrial B2B web catalog platform developed for plastic raw materials — deployed live on Vercel.",
     archNodes: [
       { tier: "01 // UI Layer", name: "Next.js / React", role: "Product Catalog", details: "Dynamic industrial material grade browser, specs filter, and quotation inquiry forms." },
       { tier: "02 // Engine", name: "Node.js Runtime", role: "Asset Optimization", details: "Static generation (ISR) ensuring sub-second initial paint and zero Cumulative Layout Shift (CLS)." },
-      { tier: "03 // Marketing", name: "Production SEO", role: "Semantic Discovery", details: "JSON-LD structured data, open-graph protocols, and canonical metadata for commercial buyers." },
-      { tier: "04 // Edge", name: "Vercel Cloud CDN", role: "Global Delivery", details: "Worldwide edge caching powering 100% production uptime for Khodal Industries." },
+      { tier: "03 // Marketing", name: "SEO & Open Graph", role: "Semantic Discovery", details: "JSON-LD structured data, open-graph protocols, and canonical metadata for commercial presentation." },
+      { tier: "04 // Edge", name: "Vercel Cloud", role: "Live Hosting", details: "Vercel edge delivery powering live catalog presentation for SP Polymers." },
     ],
-    overview: "Created a robust digital presence that translates industrial manufacturing capabilities into an intuitive, elegant web catalog. Focuses on fast load speeds, responsive device adaptations, and clear information hierarchy for commercial buyers.",
-    problem: "Industrial manufacturing companies often suffer from outdated or fragmented web presences that fail to communicate product variety, raw material grades, and production capacity to prospective buyers.",
-    solution: "Engineered an optimized digital catalog with clean navigational routes, high-contrast typography, fast static delivery, and structured company information that builds immediate buyer trust.",
+    overview: "Created a web catalog platform that translates plastic raw materials information into an intuitive catalog. Live demo deployed on Vercel.",
+    problem: "Industrial raw material catalog needs clear communication of product variety, material grades, and specifications to prospective buyers.",
+    solution: "Engineered an optimized digital catalog with clean navigational routes, high-contrast typography, fast static delivery, and structured product information.",
     features: [
       "Information platform for plastic raw materials and manufacturing processes",
       "Dynamic catalog presentation for plastic polymer raw materials and grades",
@@ -73,12 +73,12 @@ const projectsData = {
       "Component-driven frontend architecture with React & Next.js",
       "Optimized static asset bundling, responsive styling, and fast delivery",
       "Clean CSS layout systems with fluid typographic scales",
-      "Production deployment with zero layout shifts (CLS)",
+      "Vercel live deployment with zero layout shifts (CLS)",
     ],
     learnings: [
       "Structuring complex industrial product data into intuitive navigation patterns",
-      "Balancing high visual polish with lightning-fast initial load times",
-      "Designing for B2B credibility and clear conversion actions",
+      "Balancing high visual polish with fast initial load times on Vercel",
+      "Designing for clear conversion actions and user navigation",
     ],
   },
   "request-management": {
@@ -246,7 +246,7 @@ function ProjectModal({ project, onClose }) {
             <div className="modal-actions-v2">
               {project.liveUrl && (
                 <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-v2 btn-v2-primary">
-                  <span>Open Live Production Site</span>
+                  <span>Open Live Project (Vercel)</span>
                   <ArrowUpRight size={15} />
                 </a>
               )}
@@ -383,8 +383,8 @@ export function App() {
                 {
                   icon: Monitor,
                   title: "Commercial & Business Platforms",
-                  desc: "Fast commercial portals with optimized catalog discovery, high B2B credibility, and live production deployment.",
-                  tags: ["Next.js", "Production SEO", "Static ISR"],
+                  desc: "Fast commercial portals with optimized catalog discovery, clear product specs presentation, and live Vercel deployment.",
+                  tags: ["Next.js", "Vercel Live", "Static ISR"],
                 },
                 {
                   icon: Server,
@@ -456,7 +456,7 @@ export function App() {
                   I am a Computer Science &amp; Engineering student at Darshan University with an 8.87 CGPA, focused on full-stack web engineering, API design, and database systems.
                 </p>
                 <p className="about-body-para">
-                  My approach to software engineering centers on building complete, working applications — from an industrial manufacturing platform live in production for Khodal Industries to organizational request trackers and role-based academic portals.
+                  My approach to software engineering centers on building complete, working applications — from an industrial manufacturing catalog deployed live on Vercel to organizational request trackers and role-based academic portals.
                 </p>
                 <p className="about-body-para">
                   Serving as a Teaching Assistant for Database Management Systems (DBMS) and Office Automation Tools (OAT) at Darshan University has given me strong technical communication skills and a discipline for clear schema design.

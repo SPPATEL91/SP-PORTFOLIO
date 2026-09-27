@@ -210,7 +210,7 @@ export function HeroSection({ Magnetic }) {
               <div className="profile-verified-strip">
                 <div className="verified-badge-item">
                   <ShieldCheck size={13} className="verified-check-icon" />
-                  <span>Real B2B Production App</span>
+                  <span>Live on Vercel (SP Polymers)</span>
                 </div>
                 <div className="verified-badge-item">
                   <CheckCircle2 size={13} className="verified-check-icon" />
@@ -218,7 +218,7 @@ export function HeroSection({ Magnetic }) {
                 </div>
                 <div className="verified-badge-item">
                   <Sparkles size={13} className="verified-check-icon" />
-                  <span>Hackathon Finalist</span>
+                  <span>Hackathon Participant</span>
                 </div>
               </div>
 

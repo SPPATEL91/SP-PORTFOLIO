@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+import React, { useState } from "react";
 import { Terminal, Copy, Check, Sparkles } from "lucide-react";
 
 export function DeveloperTerminal() {
@@ -33,7 +33,7 @@ export function DeveloperTerminal() {
         "Full-Stack Projects Engineered: 3+",
         "Teaching Assistant Roles: 2 (DBMS Lab & Office Automation)",
         "Students Mentored in Lab Sessions: 160+ (60+ DBMS, 100+ OAT)",
-        "Hackathon Achievement: Grand Finalist (3 Stages, ~200-300 Students)",
+        "Hackathon: Participated & Reached Last Stage (3 Rounds, ~200-300 Students)",
       ],
     },
     status: {

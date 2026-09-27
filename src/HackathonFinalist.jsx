@@ -10,10 +10,10 @@ export function HackathonFinalist() {
             <Award size={12} /> COMPETITIVE ENGINEERING
           </span>
           <h2 id="hackathon-heading" className="section-title-v2 text-white">
-            Hackathon Finalist
+            Hackathon Participation
           </h2>
           <p className="section-subtitle-v2 mx-auto text-slate-300">
-            Advanced through 3 rigorous evaluation stages among ~200–300 competing students at Darshan University.
+            Participated in Darshan University Hackathon and reached the final evaluation stage among ~200–300 competing students.
           </p>
         </div>
 
@@ -32,7 +32,7 @@ export function HackathonFinalist() {
             <div className="badge-divider" />
             <div className="badge-item">
               <ShieldCheck size={14} className="text-emerald-400" />
-              <span>Grand Finalist Standing</span>
+              <span>Reached Final Stage</span>
             </div>
           </div>
 
@@ -83,14 +83,14 @@ export function HackathonFinalist() {
             <div className="stage-flow-card stage-finalist-highlight">
               <div className="stage-number highlight-num">03</div>
               <div className="stage-header">
-                <span className="stage-eyebrow accent-cyan">FINAL ROUND DEFENSE</span>
-                <h4 className="stage-title text-white">Grand Finalist Defense</h4>
+                <span className="stage-eyebrow accent-cyan">FINAL EVALUATION STAGE</span>
+                <h4 className="stage-title text-white">Final Round Defense</h4>
               </div>
               <p className="stage-desc text-slate-300">
-                Demonstrated working software live before jury and judging panel, defending security, error contracts, and real utility.
+                Demonstrated working software live before jury and judging panel, defending security, error contracts, and system functionality.
               </p>
               <div className="stage-status-pill status-finalist">
-                <Award size={12} /> Finalist Selected
+                <Award size={12} /> Reached Final Stage
               </div>
             </div>
 
